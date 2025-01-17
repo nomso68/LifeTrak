@@ -47,7 +47,7 @@ const SignIn = () => {
       setUser(data.userId);
       localStorage.setItem("user", data.userId);
       console.log(user);
-      navigate("/");
+      navigate("/tracker");
     } catch (error) {
       console.error("Error saving data:", error.message);
     }

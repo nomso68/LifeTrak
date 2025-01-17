@@ -1,337 +1,311 @@
 @media only screen and (max-width: 300px) {
-    .text {font-size: 11px}
+  .text {
+    font-size: 11px;
   }
-
-
-.feat__container{
-    width: 100vw;
-    height: 100vh;
-    position: sticky;
-    background-color: rgb(255, 255, 255);
-    padding: 50px 0px;
-    height: 130vh;
-    
-}
-.services__info{
-    width: 42%;
-    margin: 20px auto;
-    color: #656565;
-    font-family: poppins;
-    /* place-items: center; */
-}
-.services__info h1{
-
-/* Simplify your wellness with these tools */
-color: #02035D;
-margin: 15px;
-
-width: 100%;
-/* section description */
-font-family: 'Poppins';
-font-style: normal;
-font-weight: 600;
-font-size: 25px;
-line-height: 30%;
-/* or 57px */
-
-/* Primary */
-color: #02035D;
-
-
-
-}
-.services__info h3{
-
-    /* OUR FEATURES */
-    height: 31px;
-    font-family: 'Poppins';
-    font-weight: 500;
-    font-size: 20px;
-    line-height: 130%;
-    /* or 31px */
-    text-align: center;
-    letter-spacing: 0.56em;
-
-    /* Secondary */
-    color: #0096C7;
 }
 
+.feat__container {
+  width: 100vw;
+  height: 100vh;
+  position: sticky;
+  background-color: rgb(255, 255, 255);
+  padding: 50px 0px;
+  height: 130vh;
+}
+.services__info {
+  width: 42%;
+  margin: 20px auto;
+  color: #656565;
+  font-family: poppins;
+  /* place-items: center; */
+}
+.services__info h1 {
+  /* Simplify your wellness with these tools */
+  color: #02035d;
+  margin: 15px;
 
+  width: 100%;
+  /* section description */
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 25px;
+  line-height: 30%;
+  /* or 57px */
 
+  /* Primary */
+  color: #02035d;
+}
+.services__info h3 {
+  /* OUR FEATURES */
+  height: 31px;
+  font-family: "Poppins";
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 130%;
+  /* or 31px */
+  text-align: center;
+  letter-spacing: 0.56em;
+
+  /* Secondary */
+  color: #0096c7;
+}
 
 .square__grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 squares per row */
-    justify-items: center; /* Centers squares horizontally */
-    align-items: center; /* Centers squares vertically */
-    padding: 0px 180px;
-    margin-top: 55px;
-    
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 squares per row */
+  justify-items: center; /* Centers squares horizontally */
+  align-items: center; /* Centers squares vertically */
+  padding: 0px 180px;
+  margin-top: 55px;
 }
 .square2__grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); /* 3 squares per row */
-    justify-items: center; /* Centers squares horizontally */
-    align-items: center; /* Centers squares vertically */
-    padding: 0px 320px;
-    margin-top: 25px;
-    
-    
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 3 squares per row */
+  justify-items: center; /* Centers squares horizontally */
+  align-items: center; /* Centers squares vertically */
+  padding: 0px 320px;
+  margin-top: 25px;
 }
-.icon1{
-    width: 35px;
-  height: 35px;
-  
-}
-
-.icon2{
-    width: 35px;
-  height: 35px;
-  
-}
-.icon3{
-    width: 35px;
+.icon1 {
+  width: 35px;
   height: 35px;
 }
 
-.icon4{
-    width: 35px;
+.icon2 {
+  width: 35px;
+  height: 35px;
+}
+.icon3 {
+  width: 35px;
   height: 35px;
 }
 
-.icon5{
-    width: 35px;
+.icon4 {
+  width: 35px;
   height: 35px;
 }
 
-.text_icon{
-    display: flex;
-    align-items: center;
-    margin-bottom: 30px;
-    gap:10px;
-    line-height: 18px;
-    width: 60%;
-    margin-right: 60px;
-    
-    
+.icon5 {
+  width: 35px;
+  height: 35px;
+}
+
+.text_icon {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+  gap: 10px;
+  line-height: 18px;
+  width: 60%;
+  margin-right: 60px;
 }
 .square1 {
-    width: 264px; 
-    height: 300px;
-    justify-items: center; /*Centers the icon horizontally*/
-    align-content: center;
-    background-color: #02035D;
-    color: white;
-    font-size: 20px;
-    border-radius: 20px; /* Optional: round edges */
-    box-shadow: 1px 1px 26px 10px rgba(0, 0, 0, 0.1); /*Optional: shadow effect */
-    transition: transform 0.5s ease, box-shadow 0.5s ease, background-color 0.5s ease;
-    /* padding-bottom: 20px; */
-
+  width: 264px;
+  height: 300px;
+  justify-items: center; /*Centers the icon horizontally*/
+  align-content: center;
+  background-color: #02035d;
+  color: white;
+  font-size: 20px;
+  border-radius: 20px; /* Optional: round edges */
+  box-shadow: 1px 1px 26px 10px rgba(0, 0, 0, 0.1); /*Optional: shadow effect */
+  transition: transform 0.5s ease, box-shadow 0.5s ease,
+    background-color 0.5s ease;
+  /* padding-bottom: 20px; */
 }
-.square1 h3{
-    color: #ffffff;
-    font-family: poppins;
-    font-size: 18px;
-    font-weight: 500;
-    
-    
+.square1 h3 {
+  color: #ffffff;
+  font-family: poppins;
+  font-size: 18px;
+  font-weight: 500;
 }
-.square1 h5{
-    color: #ffffff;
-    font-family: poppins;
-    font-size: 12.5px;
-    text-align: left;
-    /* line-height: 1.8; */
-    font-weight: 400;
-    padding: 0px 20px;
+.square1 h5 {
+  color: #ffffff;
+  font-family: poppins;
+  font-size: 12.5px;
+  text-align: left;
+  /* line-height: 1.8; */
+  font-weight: 400;
+  padding: 0px 20px;
 }
-.square1 h2{
-    font-size: 14px;
-    color: #ffffff;
-    padding-right: 150px;
-    margin-top: 20px;
+.square1 h2 {
+  font-size: 14px;
+  color: #ffffff;
+  padding-right: 150px;
+  margin-top: 20px;
 }
 
 .styled_icon {
-    font-size: 13px; /* Adjust size */
-    margin-left: 2px; /* Add space between text and icon */
-    transition: transform 0.3s ease, color 0.3s ease; /* Smooth animation for hover */
+  font-size: 13px; /* Adjust size */
+  margin-left: 2px; /* Add space between text and icon */
+  transition: transform 0.3s ease, color 0.3s ease; /* Smooth animation for hover */
 }
-
 
 .square1:hover {
-    transform: translateY(-10px); /* Moves the square upward */
-    transition: transform 0.5s ease-in-out;
-    box-shadow: 1px 1px 26px 10px rgba(0, 225, 255, 0.342);
-    
+  transform: translateY(-10px); /* Moves the square upward */
+  transition: transform 0.5s ease-in-out;
+  box-shadow: 1px 1px 26px 10px rgba(0, 225, 255, 0.342);
 }
-
-
 
 .square2 {
-    width: 264px; 
-    height: 300px;
-    justify-items: center; /*Centers the icon horizontally*/
-    align-content: center;
-    background-color: #0096C7;
-    color: white;
-    font-size: 20px;
-    border-radius: 30px; /* Optional: round edges */
-    box-shadow: 1px 1px 26px 10px rgba(0, 0, 0, 0.1); /*Optional: shadow effect */
-    transition: transform 0.5s ease, box-shadow 0.5s ease, background-color 0.5s ease;
+  width: 264px;
+  height: 300px;
+  justify-items: center; /*Centers the icon horizontally*/
+  align-content: center;
+  background-color: #0096c7;
+  color: white;
+  font-size: 20px;
+  border-radius: 30px; /* Optional: round edges */
+  box-shadow: 1px 1px 26px 10px rgba(0, 0, 0, 0.1); /*Optional: shadow effect */
+  transition: transform 0.5s ease, box-shadow 0.5s ease,
+    background-color 0.5s ease;
 }
 .square2:hover {
-    transform: translateY(-10px); /* Moves the square upward */
-    transition: transform 0.5s ease-in-out;
-    box-shadow: 1px 1px 26px 10px rgba(0, 225, 255, 0.342);
+  transform: translateY(-10px); /* Moves the square upward */
+  transition: transform 0.5s ease-in-out;
+  box-shadow: 1px 1px 26px 10px rgba(0, 225, 255, 0.342);
 }
-.square2 h3{
-    color: #ffffff;
-    font-family: poppins;
-    font-size: 18px;
-    font-weight: 500;
+.square2 h3 {
+  color: #ffffff;
+  font-family: poppins;
+  font-size: 18px;
+  font-weight: 500;
 }
-.square2 h5{
-    color: #ffffff;
-    font-family: poppins;
-    font-size: 12.5px;
-    text-align: left;
-    /* line-height: 1.8; */
-    font-weight: 400;
-    padding: 0px 20px;
-}
-
-.square2 h2{
-    font-size: 14px;
-    color: #ffffff;
-    padding-right: 150px;
-    margin-top: 20px;
+.square2 h5 {
+  color: #ffffff;
+  font-family: poppins;
+  font-size: 12.5px;
+  text-align: left;
+  /* line-height: 1.8; */
+  font-weight: 400;
+  padding: 0px 20px;
 }
 
-
-
+.square2 h2 {
+  font-size: 14px;
+  color: #ffffff;
+  padding-right: 150px;
+  margin-top: 20px;
+}
 
 .square3 {
-    width: 264px; 
-    height: 300px;
-    justify-items: center; /*Centers the icon horizontally*/
-    align-content: center;
-    background-color: #02035D;
-    color: white;
-    font-size: 20px;
-    border-radius: 30px; /* Optional: round edges */
-    box-shadow: 1px 1px 26px 10px rgba(0, 0, 0, 0.1); /*Optional: shadow effect */
-    transition: transform 0.5s ease, box-shadow 0.5s ease, background-color 0.5s ease;
+  width: 264px;
+  height: 300px;
+  justify-items: center; /*Centers the icon horizontally*/
+  align-content: center;
+  background-color: #02035d;
+  color: white;
+  font-size: 20px;
+  border-radius: 30px; /* Optional: round edges */
+  box-shadow: 1px 1px 26px 10px rgba(0, 0, 0, 0.1); /*Optional: shadow effect */
+  transition: transform 0.5s ease, box-shadow 0.5s ease,
+    background-color 0.5s ease;
 }
 .square3:hover {
-        transform: translateY(-10px); /* Moves the square upward */
-        transition: transform 0.5s ease-in-out;
-        box-shadow: 1px 1px 26px 10px rgba(0, 225, 255, 0.342);
+  transform: translateY(-10px); /* Moves the square upward */
+  transition: transform 0.5s ease-in-out;
+  box-shadow: 1px 1px 26px 10px rgba(0, 225, 255, 0.342);
 }
-.square3 h3{
-    color: #ffffff;
-    font-family: poppins;
-    font-size: 17px;
-    font-weight: 500;
+.square3 h3 {
+  color: #ffffff;
+  font-family: poppins;
+  font-size: 17px;
+  font-weight: 500;
 }
-.square3 h5{
-    color: #ffffff;
-    font-family: poppins;
-    font-size: 12.5px;
-    text-align: left;
-    /* line-height: 1.8; */
-    font-weight: 400;
-    padding: 0px 20px;
+.square3 h5 {
+  color: #ffffff;
+  font-family: poppins;
+  font-size: 12.5px;
+  text-align: left;
+  /* line-height: 1.8; */
+  font-weight: 400;
+  padding: 0px 20px;
 }
-.square3 h2{
-    font-size: 14px;
-    color: #ffffff;
-    padding-right: 150px;
-    margin-top: 20px;
+.square3 h2 {
+  font-size: 14px;
+  color: #ffffff;
+  padding-right: 150px;
+  margin-top: 20px;
 }
-
-
-
 
 .square4 {
-    width: 264px; 
-    height: 300px;
-    justify-items: center; /*Centers the icon horizontally*/
-    align-content: center;
-    background-color: #0096C7;
-    color: white;
-    font-size: 20px;
-    border-radius: 30px; /* Optional: round edges */
-    box-shadow: 1px 1px 26px 10px rgba(0, 0, 0, 0.1); /*Optional: shadow effect */
-    transition: transform 0.5s ease, box-shadow 0.5s ease, background-color 0.5s ease;
+  width: 264px;
+  height: 300px;
+  justify-items: center; /*Centers the icon horizontally*/
+  align-content: center;
+  background-color: #0096c7;
+  color: white;
+  font-size: 20px;
+  border-radius: 30px; /* Optional: round edges */
+  box-shadow: 1px 1px 26px 10px rgba(0, 0, 0, 0.1); /*Optional: shadow effect */
+  transition: transform 0.5s ease, box-shadow 0.5s ease,
+    background-color 0.5s ease;
 }
 .square4:hover {
-    transform: translateY(-10px); /* Moves the square upward */
-    transition: transform 0.5s ease-in-out;
-    box-shadow: 1px 1px 26px 10px rgba(0, 225, 255, 0.342);
+  transform: translateY(-10px); /* Moves the square upward */
+  transition: transform 0.5s ease-in-out;
+  box-shadow: 1px 1px 26px 10px rgba(0, 225, 255, 0.342);
 }
-.square4 h3{
-    color: #ffffff;
-    font-family: poppins;
-    font-size: 18px;
-    font-weight: 500;
+.square4 h3 {
+  color: #ffffff;
+  font-family: poppins;
+  font-size: 18px;
+  font-weight: 500;
 }
-.square4 h5{
-    color: #ffffff;
-    font-family: poppins;
-    font-size: 12.5px;
-    text-align: left;
-    /* line-height: 1.8; */
-    font-weight: 400;
-    padding: 0px 20px;
-}
-
-.square4 h2{
-    font-size: 14px;
-    color: #ffffff;
-    padding-right: 150px;
-    margin-top: 20px;
+.square4 h5 {
+  color: #ffffff;
+  font-family: poppins;
+  font-size: 12.5px;
+  text-align: left;
+  /* line-height: 1.8; */
+  font-weight: 400;
+  padding: 0px 20px;
 }
 
-
-
+.square4 h2 {
+  font-size: 14px;
+  color: #ffffff;
+  padding-right: 150px;
+  margin-top: 20px;
+}
 
 .square5 {
-    width: 264px; 
-    height: 300px;
-    justify-items: center; /*Centers the icon horizontally*/
-    align-content: center;
-    background-color: #02035D;
-    color: white;
-    font-size: 20px;
-    border-radius: 30px; /* Optional: round edges */
-    box-shadow: 1px 1px 26px 10px rgba(0, 0, 0, 0.1); /*Optional: shadow effect */
-    transition: transform 0.5s ease, box-shadow 0.5s ease, background-color 0.5s ease;
+  width: 264px;
+  height: 300px;
+  justify-items: center; /*Centers the icon horizontally*/
+  align-content: center;
+  background-color: #02035d;
+  color: white;
+  font-size: 20px;
+  border-radius: 30px; /* Optional: round edges */
+  box-shadow: 1px 1px 26px 10px rgba(0, 0, 0, 0.1); /*Optional: shadow effect */
+  transition: transform 0.5s ease, box-shadow 0.5s ease,
+    background-color 0.5s ease;
 }
 .square5:hover {
-    transform: translateY(-10px); /* Moves the square upward */
-    transition: transform 0.5s ease-in-out;
-    box-shadow: 1px 1px 26px 10px rgba(0, 225, 255, 0.342);
+  transform: translateY(-10px); /* Moves the square upward */
+  transition: transform 0.5s ease-in-out;
+  box-shadow: 1px 1px 26px 10px rgba(0, 225, 255, 0.342);
 }
-.square5 h3{
-    color: #ffffff;
-    font-family: poppins;
-    font-size: 18px;
-    font-weight: 500;
+.square5 h3 {
+  color: #ffffff;
+  font-family: poppins;
+  font-size: 18px;
+  font-weight: 500;
 }
-.square5 h5{
-    color: #ffffff;
-    font-family: poppins;
-    font-size: 12.5px;
-    text-align: left;
-    /* line-height: 1.8; */
-    font-weight: 400;
-    padding: 0px 20px;
+.square5 h5 {
+  color: #ffffff;
+  font-family: poppins;
+  font-size: 12.5px;
+  text-align: left;
+  /* line-height: 1.8; */
+  font-weight: 400;
+  padding: 0px 20px;
 }
-.square5 h2{
-    font-size: 14px;
-    color: #ffffff;
-    padding-right: 150px;
-    margin-top: 20px;
+.square5 h2 {
+  font-size: 14px;
+  color: #ffffff;
+  padding-right: 150px;
+  margin-top: 20px;
 }

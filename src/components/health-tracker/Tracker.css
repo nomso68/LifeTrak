@@ -5,6 +5,7 @@
   color: #02035d;
   font-family: poppins;
   padding: 110px 25px 55px;
+  box-sizing: border-box;
 }
 
 .hayft {
@@ -16,25 +17,26 @@
 
 .bell {
   position: relative;
-  top: 100px;
+  top: 0; /* Adjusted for consistency */
 }
 
 .a1 {
   display: flex;
-  gap: 139px;
+  flex-wrap: wrap; /* Enable wrapping for smaller screens */
+  gap: 20px; /* Reduced gap for better spacing */
   align-items: center;
   width: 100%;
 }
 
 .a2 {
   display: flex;
+  flex-wrap: wrap; /* Enable wrapping for smaller screens */
   justify-content: space-between;
   align-items: center;
   font-size: 1.5rem;
   font-weight: 500;
   line-height: 1.75rem;
-  width: 379px;
-  justify-content: space-between;
+  width: 100%; /* Adjusted width for responsiveness */
 }
 
 .vitals {
@@ -46,7 +48,7 @@
 .del {
   display: flex;
   flex-direction: column;
-  gap: 4rem;
+  gap: 2rem; /* Adjusted gap for consistency */
 }
 
 .del a {
@@ -65,6 +67,7 @@
 .report-date {
   display: flex;
   gap: 2rem;
+  flex-wrap: wrap; /* Enable wrapping for smaller screens */
 }
 
 .vitals-header {
@@ -97,16 +100,20 @@
 .trackerbg input[type="text"],
 .trackerbg input[type="number"] {
   padding: 0.75rem 2rem;
+  width: 100%; /* Full width for smaller screens */
+  box-sizing: border-box;
 }
 
 .parameter {
   display: flex;
   gap: 0.75rem;
   align-items: center;
+  flex-wrap: wrap; /* Allow parameters to wrap */
 }
 
 .parameter input {
-  width: 153px;
+  width: 100%; /* Adjust width for smaller screens */
+  max-width: 200px; /* Set a max-width for better layout control */
   height: 55px;
   border: 0.125rem solid #02035d;
   background-color: transparent;
@@ -120,13 +127,15 @@
   display: flex;
   gap: 2.875rem;
   align-items: center;
+  flex-wrap: wrap; /* Enable wrapping for smaller screens */
 }
 
 .vitals-name {
   display: flex;
   align-items: center;
   padding: 0.625rem;
-  width: 18.75rem;
+  width: 100%; /* Full width for smaller screens */
+  max-width: 18.75rem; /* Set max-width for better control */
 }
 
 .tracker-title {
@@ -157,19 +166,16 @@
   border: 2px solid #02035d;
   background-color: transparent;
   border-radius: 0.75rem;
-  width: 26rem;
+  width: 100%; /* Full width for smaller screens */
+  max-width: 26rem; /* Maintain consistent width */
   padding: 0.75rem 2.5rem;
 }
 
 .date-input::-webkit-calendar-picker-indicator {
   background: url("../../assets/calendar-days.svg") no-repeat center;
-  color: transparent; /* Hide default icon */
+  color: transparent;
   cursor: pointer;
 }
-
-/* .report-date label {
-  display: block;
-} */
 
 .report-date div {
   display: flex;
@@ -177,6 +183,7 @@
   gap: 0.5rem;
 }
 
+/* Responsive Design */
 @media screen and (max-width: 800px) {
   .report-date {
     flex-direction: column;
@@ -186,17 +193,29 @@
     margin-right: 0;
     line-height: 3.5rem;
   }
+
+  .a1 {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .vitals-row {
+    gap: 1rem;
+  }
 }
 
 @media (max-width: 480px) {
-  .a1 {
-    flex-direction: column-reverse;
-    align-items: start;
-    gap: 70px;
+  .vitals-name {
+    width: 100%;
   }
 
-  .vitals-name {
-    width: 10rem;
+  .parameter input {
+    max-width: 100%; /* Full width on smaller screens */
+  }
+
+  .date-input {
+    width: 100%;
   }
 }
 
@@ -209,22 +228,6 @@
 .notif {
   display: flex;
   align-items: center;
-}
-
-.bell {
-  position: relative;
-  top: 0px;
-  right: 0px;
-}
-
-.dot {
-  width: 10px;
-  height: 10px;
-  background: red;
-  border-radius: 5px;
-  position: relative;
-  top: 5px;
-  right: 12px;
 }
 
 .rule {
