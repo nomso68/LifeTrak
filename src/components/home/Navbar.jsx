@@ -20,13 +20,19 @@ const Navbar = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Synchronize userId with localStorage
+  // Update userId when localStorage changes
   useEffect(() => {
-    const storedUserId = localStorage.getItem("user");
-    if (storedUserId !== userId) {
-      setUserId(storedUserId);
-    }
-  }, [userId]);
+    const handleStorageChange = () => {
+      setUserId(localStorage.getItem("user") || "");
+    };
+
+    // Listen for changes to localStorage
+    window.addEventListener("storage", handleStorageChange);
+
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+    };
+  }, []);
 
   const handleMenu = () => {
     setMenu((prevMenu) => !prevMenu);
@@ -51,7 +57,7 @@ const Navbar = () => {
 
       // Clear user data
       localStorage.removeItem("user");
-      setUserId("");
+      setUserId(""); // Update the state immediately
       window.location.href = "/";
     } catch (error) {
       console.error("Error during logout:", error);
