@@ -103,11 +103,11 @@ const Navbar = ({ login }) => {
       </div>
       {!userId && (
         <div className="bt">
-          {window.location.href.slice(-5) !== "login" && (
+          {/* {window.location.href.slice(-5) !== "login" && (
             <Link to={"/login"}>
               <button className="btn1">Login</button>
             </Link>
-          )}
+          )} */}
           <Link to={"/register"}>
             <button className="btn2">Sign Up</button>
           </Link>
