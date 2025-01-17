@@ -1,67 +1,33 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import "./Navbar.css";
 import Logo from "../../assets/LifeLogo.png";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import profile from "../../assets/profile.png";
 import MenuHamburger1 from "./MenuHamburger1";
+import { AuthContext } from "../../../utils/AuthContext";
 
 const Navbar = () => {
-  const [menu, setMenu] = useState(window.innerWidth > 992);
-  const [userId, setUserId] = useState(localStorage.getItem("user") || "");
-  const location = useLocation(); // React Router's hook to get the current location
-
-  // Handle menu visibility based on screen size
-  useEffect(() => {
-    const handleResize = () => {
-      setMenu(window.innerWidth > 992);
-    };
-
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  // Update userId when localStorage changes
-  useEffect(() => {
-    const handleStorageChange = () => {
-      setUserId(localStorage.getItem("user") || "");
-    };
-
-    // Listen for changes to localStorage
-    window.addEventListener("storage", handleStorageChange);
-
-    return () => {
-      window.removeEventListener("storage", handleStorageChange);
-    };
-  }, []);
+  const [menu, setMenu] = useState(true);
+  const { userInfo, logout } = useContext(AuthContext);
 
   const handleMenu = () => {
     setMenu((prevMenu) => !prevMenu);
   };
 
+  useEffect(() => {
+    const handleResize = () => {
+      setMenu(window.innerWidth > 992);
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const handleLogout = async () => {
-    try {
-      const response = await fetch(
-        "https://lifetrak.onrender.com/api/auth/logout",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ userId }),
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error(`Logout failed: ${response.status}`);
-      }
-
-      // Clear user data
-      localStorage.removeItem("user");
-      setUserId(""); // Update the state immediately
-      window.location.href = "/";
-    } catch (error) {
-      console.error("Error during logout:", error);
-    }
+    await logout();
+    window.location.href = "/";
   };
 
   return (
@@ -71,13 +37,11 @@ const Navbar = () => {
           <MenuHamburger1 />
         </button>
       )}
-
       <div className="logo">
         <Link to="/">
           <img src={Logo} alt="Logo" />
         </Link>
       </div>
-
       <div className="menu">
         <ul className={`navbar__ul ${menu ? "show" : ""}`}>
           <li>
@@ -112,10 +76,9 @@ const Navbar = () => {
           </li>
         </ul>
       </div>
-
-      {!userId ? (
+      {!userInfo ? (
         <div className="bt">
-          {location.pathname !== "/login" && (
+          {window.location.pathname !== "/login" && (
             <Link to="/login">
               <button className="btn1">Login</button>
             </Link>
