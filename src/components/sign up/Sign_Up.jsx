@@ -14,6 +14,7 @@ const Sign_Up = () => {
     password: "",
     confirmPassword: "",
   });
+  const navigate = useNavigate();
 
   const [error, setError] = useState(null);
 
@@ -26,7 +27,6 @@ const Sign_Up = () => {
   };
 
   const handleSubmit = (e) => {
-    const navigate = useNavigate();
     e.preventDefault();
 
     if (form.password !== form.confirmPassword) {
