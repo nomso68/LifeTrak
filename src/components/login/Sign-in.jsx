@@ -8,6 +8,8 @@ import { useNavigate } from "react-router-dom";
 
 const SignIn = () => {
   const navigate = useNavigate();
+  const [forgotEmail, setForgotEmail] = useState("");
+  const [showForgotModal, setShowForgotModal] = useState(false);
   const [form, setForm] = useState({
     username: "",
     password: "",
@@ -52,6 +54,29 @@ const SignIn = () => {
       console.error("Error saving data:", error.message);
     }
   };
+
+  const handleForgotPassword = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch(
+        "https://lifetrak.onrender.com/api/forgot-password",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: forgotEmail }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      alert("Password reset email sent! Check your inbox.");
+      setShowForgotModal(false);
+    } catch (error) {
+      console.error("Error sending forgot password email:", error.message);
+    }
+  };
   return (
     <>
       <main className="loginbg">
@@ -93,11 +118,36 @@ const SignIn = () => {
             </div>
           </div>
           <div className="submit">
-            <button className="transparent">Forgot Password</button>
+            <button
+              type="button"
+              className="transparent"
+              onClick={() => setShowForgotModal(true)}
+            >
+              Forgot Password
+            </button>
             <button className="button">Login</button>
           </div>
         </form>
       </main>
+
+      {showForgotModal && (
+        <div className="modal">
+          <h2>Forgot Password</h2>
+          <form onSubmit={handleForgotPassword}>
+            <label htmlFor="forgotEmail">Enter your email:</label>
+            <input
+              type="email"
+              id="forgotEmail"
+              value={forgotEmail}
+              onChange={(e) => setForgotEmail(e.target.value)}
+            />
+            <button type="submit">Send Reset Link</button>
+            <button type="button" onClick={() => setShowForgotModal(false)}>
+              Cancel
+            </button>
+          </form>
+        </div>
+      )}
     </>
   );
 };

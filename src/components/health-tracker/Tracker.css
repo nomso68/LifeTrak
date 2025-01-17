@@ -1,10 +1,15 @@
+.main-tracker {
+  background-color: white;
+}
 .trackerbg {
   width: 100%;
   height: auto;
   background: #fafafa;
   color: #02035d;
   font-family: poppins;
-  padding: 110px 25px 55px;
+  padding: 20px;
+  max-width: 1100px;
+  margin: 0 auto;
   box-sizing: border-box;
 }
 
@@ -17,26 +22,26 @@
 
 .bell {
   position: relative;
-  top: 0; /* Adjusted for consistency */
+  top: 0;
 }
 
 .a1 {
   display: flex;
-  flex-wrap: wrap; /* Enable wrapping for smaller screens */
-  gap: 20px; /* Reduced gap for better spacing */
+  flex-wrap: wrap;
+  gap: 20px;
   align-items: center;
   width: 100%;
 }
 
 .a2 {
   display: flex;
-  flex-wrap: wrap; /* Enable wrapping for smaller screens */
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   font-size: 1.5rem;
   font-weight: 500;
   line-height: 1.75rem;
-  width: 100%; /* Adjusted width for responsiveness */
+  width: 100%;
 }
 
 .vitals {
@@ -48,7 +53,7 @@
 .del {
   display: flex;
   flex-direction: column;
-  gap: 2rem; /* Adjusted gap for consistency */
+  gap: 2rem;
 }
 
 .del a {
@@ -67,7 +72,7 @@
 .report-date {
   display: flex;
   gap: 2rem;
-  flex-wrap: wrap; /* Enable wrapping for smaller screens */
+  flex-wrap: wrap;
 }
 
 .vitals-header {
@@ -100,7 +105,7 @@
 .trackerbg input[type="text"],
 .trackerbg input[type="number"] {
   padding: 0.75rem 2rem;
-  width: 100%; /* Full width for smaller screens */
+  width: 100%;
   box-sizing: border-box;
 }
 
@@ -108,12 +113,12 @@
   display: flex;
   gap: 0.75rem;
   align-items: center;
-  flex-wrap: wrap; /* Allow parameters to wrap */
+  flex-wrap: wrap;
 }
 
 .parameter input {
-  width: 100%; /* Adjust width for smaller screens */
-  max-width: 200px; /* Set a max-width for better layout control */
+  width: 100%;
+  max-width: 200px;
   height: 55px;
   border: 0.125rem solid #02035d;
   background-color: transparent;
@@ -127,25 +132,29 @@
   display: flex;
   gap: 2.875rem;
   align-items: center;
-  flex-wrap: wrap; /* Enable wrapping for smaller screens */
+  flex-wrap: wrap;
 }
 
 .vitals-name {
   display: flex;
   align-items: center;
   padding: 0.625rem;
-  width: 100%; /* Full width for smaller screens */
-  max-width: 18.75rem; /* Set max-width for better control */
+  width: 100%;
+  max-width: 18.75rem;
 }
 
 .tracker-title {
-  font-size: 3.25rem;
+  font-size: 2.5rem;
   font-weight: 600;
   line-height: 3.5rem;
 }
 
+.patient-name {
+  color: #0096c7;
+}
+
 .subtitle {
-  font-size: 2.25rem;
+  font-size: 1.2rem;
   font-weight: 400;
   line-height: 1.75rem;
   margin-right: 160px;
@@ -166,8 +175,8 @@
   border: 2px solid #02035d;
   background-color: transparent;
   border-radius: 0.75rem;
-  width: 100%; /* Full width for smaller screens */
-  max-width: 26rem; /* Maintain consistent width */
+  width: 100%;
+  max-width: 26rem;
   padding: 0.75rem 2.5rem;
 }
 
@@ -192,6 +201,7 @@
   .subtitle {
     margin-right: 0;
     line-height: 3.5rem;
+    font-size: 1.75rem; /* Adjust font size */
   }
 
   .a1 {
@@ -205,7 +215,23 @@
   }
 
   .print-report {
-    flex-direction: row;
+    flex-direction: column; /* Change to column for smaller screens */
+  }
+
+  .tracker-title {
+    font-size: 2.5rem; /* Adjust font size */
+  }
+
+  .faa {
+    font-size: 1.125rem; /* Adjust font size */
+  }
+
+  .vitals-title {
+    font-size: 1.75rem; /* Adjust font size */
+  }
+
+  .parameter input {
+    max-width: 100%;
   }
 }
 
@@ -215,18 +241,33 @@
   }
 
   .parameter input {
-    max-width: 100%; /* Full width on smaller screens */
+    max-width: 100%;
   }
 
   .date-input {
     width: 100%;
+  }
+
+  .tracker-title {
+    font-size: 2rem; /* Adjust font size for small screens */
+  }
+
+  .subtitle {
+    font-size: 1.5rem; /* Adjust font size */
+  }
+
+  .faa {
+    font-size: 1rem; /* Adjust font size */
+  }
+
+  .vitals-title {
+    font-size: 1.5rem; /* Adjust font size */
   }
 }
 
 .print-report {
   display: flex;
   flex-direction: row;
-
   gap: 4rem;
 }
 

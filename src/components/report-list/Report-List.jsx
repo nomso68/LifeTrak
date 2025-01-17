@@ -142,8 +142,8 @@ const ReportList = () => {
     fetchReportData();
   }, []);
   return (
-    <>
-      <main className="trackerbg">
+    <div className="main-tracker">
+      <div className="trackerbg">
         <h1 className="report-heading">Report List</h1>
         <div className="filters">
           <div className="filters-left">
@@ -220,8 +220,8 @@ const ReportList = () => {
           </table>
         </div>
         {/* <Pagination /> */}
-      </main>
-    </>
+      </div>
+    </div>
   );
 };
 

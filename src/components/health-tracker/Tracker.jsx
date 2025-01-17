@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./Tracker.css";
 import Bell1 from "./Bell1";
 import ChevronDown from "./ChevronDown";
@@ -6,7 +6,9 @@ import { useNavigate, Link } from "react-router-dom";
 
 const Tracker = () => {
   const navigate = useNavigate();
-  const [userId, setUserId] = useState(localStorage.getItem("user") || ""); // Initialize with stored userId or empty string
+  const [userId, setUserId] = useState(localStorage.getItem("user") || "");
+  const [patientName, setPatientName] = useState("");
+  const [selectedDate, setSelectedDate] = useState("");
   const [formData, setFormData] = useState({
     userId: userId,
     date: new Date().toISOString().split("T")[0],
@@ -30,148 +32,188 @@ const Tracker = () => {
     },
   });
 
-  // Ensure userId is up-to-date
   useEffect(() => {
-    const storedUserId = localStorage.getItem("user");
-    if (storedUserId) {
-      setUserId(storedUserId);
-      setFormData((prevData) => ({
-        ...prevData,
-        userId: storedUserId,
+    const fetchDashboard = async () => {
+      try {
+        const response = await fetch(
+          "https://lifetrak.onrender.com/api/protected/dashboard",
+          {
+            method: "GET",
+            credentials: "include",
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        setPatientName(data.fullname);
+      } catch (err) {
+        console.error("Error fetching dashboard data:", err);
+        alert("Access Denied. Please log in again.");
+        navigate("/login");
+      }
+    };
+
+    fetchDashboard();
+  }, [navigate]);
+
+  // Handle date change
+  const handleDateChange = (e) => {
+    setSelectedDate(e.target.value);
+  };
+
+  useEffect(() => {
+    if (userId) {
+      setFormData((prevState) => ({
+        ...prevState,
+        userId,
+      }));
+    }
+  }, [userId]);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    const [category, key] = name.split(".");
+
+    if (category === "vitals" || category === "exerciseLog") {
+      setFormData((prevState) => ({
+        ...prevState,
+        [category]: {
+          ...prevState[category],
+          [key]: value,
+        },
       }));
     } else {
-      console.warn("User ID not found in localStorage");
+      setFormData((prevState) => ({
+        ...prevState,
+        [name]: value,
+      }));
     }
-  }, []);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      vitals: {
-        ...prevData.vitals,
-        [name]: value,
-      },
-    }));
   };
 
-  const handleDateChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.id]: e.target.value,
-    });
-  };
-
-  const handleExerciseChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      exerciseLog: {
-        ...prevData.exerciseLog,
-        [name]: value,
-      },
-    }));
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!userId) {
-      console.error("User ID is required to submit the form");
-      return;
-    }
-
-    if (formData.exerciseLog.cycling < 1) {
-      window.alert("Rope Skipping counts must be a non-negative integer");
-      return;
-    } else if (formData.exerciseLog.ropeSkipping < 1) {
-      window.alert("Cycling distance must be a positive number");
-      return;
-    } else if (formData.exerciseLog.yoga < 1) {
-      window.alert("Yoga duration must be a non-negative integer (minutes)");
-      return;
-    } else if (formData.exerciseLog.walking < 1) {
-      window.alert("Walking distance must be a positive number");
-      return;
-    } else if (formData.exerciseLog.jogging < 1) {
-      window.alert("Jogging distance must be a positive number");
-      return;
-    } else if (formData.exerciseLog.running < 1) {
-      window.alert("Running distance must be a positive number");
-      return;
-    } else if (formData.exerciseLog.dance < 1) {
-      window.alert("Dance duration must be a non-negative integer (minutes)");
-      return;
-    } else if (
-      formData.vitals.bodyTemperature > 42 ||
-      formData.vitals.bodyTemperature < 35
-    ) {
-      window.alert("Body Temperature must be between 35°C and 42°C");
-      return;
-    } else if (
-      formData.vitals.pulseRate > 200 ||
-      formData.vitals.pulseRate < 40
-    ) {
-      window.alert("Pulse Rate must be between 40 and 200 beats per minute");
-      return;
-    } else if (
-      formData.vitals.respirationRate > 50 ||
-      formData.vitals.respirationRate < 10
-    ) {
-      window.alert(
-        "Respiration Rate must be between 10 and 50 breaths per minute"
-      );
-      return;
-    } else if (
-      formData.vitals.bloodOxygen > 100 ||
-      formData.vitals.bloodOxygen < 0
-    ) {
-      window.alert("Blood Oxygen level must be between 0% and 100%");
-      return;
-    } else if (formData.vitals.weight > 500 || formData.vitals.weight < 0) {
-      window.alert("Weight must be between 0 and 500 kg");
-      return;
-    } else if (
-      formData.vitals.bloodGlucoseLevel > 30 ||
-      formData.vitals.bloodGlucoseLevel < 0
-    ) {
-      window.alert();
-      return;
-    }
-
     try {
-      fetch("https://lifetrak.onrender.com/api/healthstats", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      // Convert string values to numbers where applicable
+      const convertedFormData = {
+        ...formData,
+        vitals: {
+          ...formData.vitals,
+          bodyTemperature: formData.vitals.bodyTemperature
+            ? parseFloat(formData.vitals.bodyTemperature)
+            : null,
+          pulseRate: formData.vitals.pulseRate
+            ? parseInt(formData.vitals.pulseRate, 10)
+            : null,
+          respirationRate: formData.vitals.respirationRate
+            ? parseInt(formData.vitals.respirationRate, 10)
+            : null,
+          bloodOxygen: formData.vitals.bloodOxygen
+            ? parseFloat(formData.vitals.bloodOxygen)
+            : null,
+          weight: formData.vitals.weight
+            ? parseFloat(formData.vitals.weight)
+            : null,
+          bloodGlucoseLevel: formData.vitals.bloodGlucoseLevel
+            ? parseFloat(formData.vitals.bloodGlucoseLevel)
+            : null,
         },
-        body: JSON.stringify(formData),
-      })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-          }
-          return response.json();
-        })
-        .then((data) => {
-          console.log("Data saved successfully:", data);
-          navigate("/report");
-        })
-        .catch((error) => {
-          console.error("Error saving data:", error);
-        });
-    } catch (error) {
-      console.error("Error submitting form:", error);
+        exerciseLog: {
+          ...formData.exerciseLog,
+          walking: formData.exerciseLog.walking
+            ? parseFloat(formData.exerciseLog.walking)
+            : null,
+          jogging: formData.exerciseLog.jogging
+            ? parseFloat(formData.exerciseLog.jogging)
+            : null,
+          running: formData.exerciseLog.running
+            ? parseFloat(formData.exerciseLog.running)
+            : null,
+          cycling: formData.exerciseLog.cycling
+            ? parseFloat(formData.exerciseLog.cycling)
+            : null,
+          ropeSkipping: formData.exerciseLog.ropeSkipping
+            ? parseInt(formData.exerciseLog.ropeSkipping, 10)
+            : null,
+          yoga: formData.exerciseLog.yoga
+            ? parseInt(formData.exerciseLog.yoga, 10)
+            : null,
+          dance: formData.exerciseLog.dance
+            ? parseInt(formData.exerciseLog.dance, 10)
+            : null,
+        },
+      };
+
+      const data = {
+        ...convertedFormData,
+        date: selectedDate || new Date().toISOString().split("T")[0],
+      };
+
+      console.log("Payload Data:", JSON.stringify(data, null, 2));
+
+      const response = await fetch(
+        "https://lifetrak.onrender.com/api/healthstats",
+        {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
+
+      if (!response.ok) {
+        const errorDetails = await response.json();
+        console.error("Backend Error Details:", errorDetails);
+        throw new Error(errorDetails.message || "Failed to log health stats");
+      }
+
+      alert("Health stats logged successfully!");
+      navigate("/report");
+
+      setFormData({
+        userId,
+        date: new Date().toISOString().split("T")[0],
+        vitals: {
+          bodyTemperature: "",
+          pulseRate: "",
+          respirationRate: "",
+          bloodPressure: "",
+          bloodOxygen: "",
+          weight: "",
+          bloodGlucoseLevel: "",
+        },
+        exerciseLog: {
+          walking: "",
+          jogging: "",
+          running: "",
+          cycling: "",
+          ropeSkipping: "",
+          yoga: "",
+          dance: "",
+        },
+      });
+
+      setSelectedDate("");
+    } catch (err) {
+      console.error("Error logging health stats:", err);
     }
   };
 
   return (
-    <>
-      <main className="trackerbg">
+    <div className="main-tracker">
+      <div className="trackerbg">
         <form action="" onSubmit={handleSubmit}>
           <section className="hayft">
             <div className="a1">
-              <h1 className="tracker-title">How are you feeling today?</h1>
+              <h1 className="tracker-title">
+                How are you feeling today?{" "}
+                <span className="patient-name">{patientName}</span>
+              </h1>
               <Link to={"/profile"} className="a2">
                 <p>Edit Personal Data</p>
                 <span className="notif">
@@ -185,12 +227,11 @@ const Tracker = () => {
             <div className="a1">
               <p className="subtitle">Log your health stats for today!</p>
               <input
-                name="date"
+                type="date"
                 id="date"
-                value={formData.date}
+                value={selectedDate}
                 onChange={handleDateChange}
                 className="date-input"
-                type="date"
               />
             </div>
           </section>
@@ -202,134 +243,132 @@ const Tracker = () => {
             <div className="vitals-list">
               <div className="vitals-row">
                 <div className="vitals-name">
-                  <label className="vitals-label" htmlFor="">
-                    Body Temperature
+                  <label className="vitals-label" htmlFor="bodyTemperature">
+                    Body Temperature (Expected: 36.1°C - 37.2°C)
                   </label>
                 </div>
                 <span className="parameter">
                   <input
-                    min={35}
-                    max={42}
-                    name="bodyTemperature"
-                    value={formData.vitals.bodyTemperature}
-                    onChange={handleChange}
-                    id="bodyTemperature"
                     type="number"
+                    name="vitals.bodyTemperature"
+                    id="bodyTemperature"
+                    placeholder="e.g., 36.8"
+                    value={formData.vitals.bodyTemperature}
+                    onChange={handleInputChange}
                   />
                   <p>°C</p>
                 </span>
               </div>
+
               <div className="vitals-row">
                 <div className="vitals-name">
-                  {" "}
-                  <label className="vitals-label" htmlFor="">
-                    Pulse Rate{" "}
+                  <label className="vitals-label" htmlFor="pulseRate">
+                    Pulse Rate (Normal: 60-100 beats/min)
                   </label>
                 </div>
                 <span className="parameter">
                   <input
-                    min={40}
-                    max={200}
-                    name="pulseRate"
-                    value={formData.vitals.pulseRate}
-                    onChange={handleChange}
-                    id="pulseRate"
                     type="number"
+                    name="vitals.pulseRate"
+                    id="pulseRate"
+                    placeholder="e.g., 72"
+                    value={formData.vitals.pulseRate}
+                    onChange={handleInputChange}
                   />
                   <p>beats per minute</p>
                 </span>
               </div>
+
               <div className="vitals-row">
                 <div className="vitals-name">
-                  {" "}
-                  <label className="vitals-label" htmlFor="">
-                    Respiration Rate
+                  <label className="vitals-label" htmlFor="respirationRate">
+                    Respiration Rate (Normal: 12-20 breaths/min)
                   </label>
                 </div>
                 <span className="parameter">
                   <input
-                    min={10}
-                    max={50}
-                    name="respirationRate"
-                    value={formData.vitals.respirationRate}
-                    onChange={handleChange}
-                    id="respirationRate"
                     type="number"
+                    name="vitals.respirationRate"
+                    id="respirationRate"
+                    placeholder="e.g., 16"
+                    value={formData.vitals.respirationRate}
+                    onChange={handleInputChange}
                   />
                   <p>breaths per minute</p>
                 </span>
               </div>
+
               <div className="vitals-row">
                 <div className="vitals-name">
-                  {" "}
-                  <label className="vitals-label" htmlFor="">
-                    Blood Pressure
+                  <label className="vitals-label" htmlFor="bloodPressure">
+                    Blood Pressure (Normal: 120/80 mmHg)
                   </label>
                 </div>
                 <span className="parameter">
                   <input
-                    name="bloodPressure"
-                    value={formData.vitals.bloodPressure}
-                    onChange={handleChange}
-                    id="bloodPressure"
                     type="text"
+                    name="vitals.bloodPressure"
+                    id="bloodPressure"
+                    placeholder="e.g., 120/80"
+                    value={formData.vitals.bloodPressure}
+                    onChange={handleInputChange}
                   />
                   <p>mmHg</p>
                 </span>
               </div>
+
               <div className="vitals-row">
                 <div className="vitals-name">
-                  {" "}
-                  <label className="vitals-label" htmlFor="">
-                    Blood Oxygen
+                  <label className="vitals-label" htmlFor="bloodOxygen">
+                    Blood Oxygen (Normal: 95%-100%)
                   </label>
                 </div>
                 <span className="parameter">
                   <input
-                    min={0}
-                    max={100}
-                    id="bloodOxygen"
-                    name="bloodOxygen"
-                    value={formData.vitals.bloodOxygen}
-                    onChange={handleChange}
                     type="number"
+                    name="vitals.bloodOxygen"
+                    id="bloodOxygen"
+                    placeholder="e.g., 98"
+                    value={formData.vitals.bloodOxygen}
+                    onChange={handleInputChange}
                   />
-                  <p>PaO2</p>
+                  <p>%</p>
                 </span>
               </div>
+
               <div className="vitals-row">
                 <div className="vitals-name">
-                  {" "}
-                  <label className="vitals-label" htmlFor="">
-                    Weight
+                  <label className="vitals-label" htmlFor="weight">
+                    Weight (Enter in kg)
                   </label>
                 </div>
                 <span className="parameter">
                   <input
-                    min={0}
-                    max={500}
-                    id="weight"
-                    name="weight"
-                    value={formData.vitals.weight}
-                    onChange={handleChange}
                     type="number"
+                    name="vitals.weight"
+                    id="weight"
+                    placeholder="e.g., 70"
+                    value={formData.vitals.weight}
+                    onChange={handleInputChange}
                   />
                   <p>kg</p>
                 </span>
               </div>
+
               <div className="vitals-row">
                 <div className="vitals-name">
-                  <label className="vitals-label" htmlFor="">
-                    Blood Glucose Level
+                  <label className="vitals-label" htmlFor="bloodGlucoseLevel">
+                    Blood Glucose Level (Normal: 4.0-5.4 mmol/L)
                   </label>
                 </div>
                 <span className="parameter">
                   <input
+                    type="number"
+                    name="vitals.bloodGlucoseLevel"
                     id="bloodGlucoseLevel"
-                    name="bloodGlucoseLevel"
+                    placeholder="e.g., 5.1"
                     value={formData.vitals.bloodGlucoseLevel}
-                    onChange={handleChange}
-                    type="text"
+                    onChange={handleInputChange}
                   />
                   <p>mmol/L</p>
                 </span>
@@ -349,140 +388,126 @@ const Tracker = () => {
                 <div className="vitals-row">
                   <div className="vitals-name">
                     <label className="vitals-label" htmlFor="">
-                      Walking{" "}
+                      Walking - Distance covered while walking (Recommended: 3–5
+                      km per day)
                     </label>
                   </div>
                   <span className="parameter">
                     <input
-                      min={1}
-                      id="walking"
-                      name="walking"
+                      type="number"
+                      name="exerciseLog.walking"
                       value={formData.exerciseLog.walking}
-                      onChange={handleExerciseChange}
-                      type="number"
+                      onChange={handleInputChange}
                     />
                     <p>km</p>
                   </span>
                 </div>
                 <div className="vitals-row">
                   <div className="vitals-name">
-                    {" "}
                     <label className="vitals-label" htmlFor="">
-                      Jogging
+                      Jogging - Distance covered while jogging (Recommended: 2–4
+                      km per day)
                     </label>
                   </div>
                   <span className="parameter">
                     <input
-                      min={1}
-                      id="jogging"
-                      name="jogging"
+                      type="number"
+                      name="exerciseLog.jogging"
                       value={formData.exerciseLog.jogging}
-                      onChange={handleExerciseChange}
-                      type="number"
+                      onChange={handleInputChange}
                     />
                     <p>km</p>
                   </span>
                 </div>
                 <div className="vitals-row">
                   <div className="vitals-name">
-                    {" "}
                     <label className="vitals-label" htmlFor="">
-                      Running
+                      Running - Distance covered while running (Recommended: 1–3
+                      km per day)
                     </label>
                   </div>
                   <span className="parameter">
                     <input
-                      min={1}
-                      id="running"
-                      name="running"
+                      type="number"
+                      name="exerciseLog.running"
                       value={formData.exerciseLog.running}
-                      onChange={handleExerciseChange}
-                      type="number"
+                      onChange={handleInputChange}
                     />
                     <p>km</p>
                   </span>
                 </div>
                 <div className="vitals-row">
                   <div className="vitals-name">
-                    {" "}
                     <label className="vitals-label" htmlFor="">
-                      Cycling
+                      Cycling - Distance covered while cycling (Recommended:
+                      5–10 km per session)
                     </label>
                   </div>
                   <span className="parameter">
                     <input
-                      min={1}
-                      id="cycling"
-                      name="cycling"
+                      type="number"
+                      name="exerciseLog.cycling"
                       value={formData.exerciseLog.cycling}
-                      onChange={handleExerciseChange}
-                      type="number"
+                      onChange={handleInputChange}
                     />
                     <p>km</p>
                   </span>
                 </div>
                 <div className="vitals-row">
                   <div className="vitals-name">
-                    {" "}
                     <label className="vitals-label" htmlFor="">
-                      Rope Skipping{" "}
+                      Rope Skipping - Number of skips (Recommended: 50–200 skips
+                      per session)
                     </label>
                   </div>
                   <span className="parameter">
                     <input
-                      min={1}
-                      id="ropeSkipping"
-                      name="ropeSkipping"
-                      value={formData.exerciseLog.ropeSkipping}
-                      onChange={handleExerciseChange}
                       type="number"
+                      name="exerciseLog.ropeSkipping"
+                      value={formData.exerciseLog.ropeSkipping}
+                      onChange={handleInputChange}
                     />
                     <p>counts</p>
                   </span>
                 </div>
                 <div className="vitals-row">
                   <div className="vitals-name">
-                    {" "}
                     <label className="vitals-label" htmlFor="">
-                      Yoga
+                      Yoga Time spent practicing yoga (Recommended: 15–60
+                      minutes per session)
                     </label>
                   </div>
                   <span className="parameter">
                     <input
-                      min={1}
-                      id="yoga"
-                      name="yoga"
-                      value={formData.exerciseLog.yoga}
-                      onChange={handleExerciseChange}
                       type="number"
+                      name="exerciseLog.yoga"
+                      value={formData.exerciseLog.yoga}
+                      onChange={handleInputChange}
                     />
                     <p>mins</p>
                   </span>
                 </div>
                 <div className="vitals-row">
                   <div className="vitals-name">
-                    {" "}
                     <label className="vitals-label" htmlFor="">
-                      Dance
+                      Dance - Time spent dancing (Recommended: 20–45 minutes per
+                      session)
                     </label>
                   </div>
                   <span className="parameter">
                     <input
-                      id="dance"
-                      name="dance"
-                      value={formData.exerciseLog.dance}
-                      onChange={handleExerciseChange}
                       type="number"
+                      name="exerciseLog.dance"
+                      value={formData.exerciseLog.dance}
+                      onChange={handleInputChange}
                     />
                     <p>mins</p>
                   </span>
                 </div>
               </div>
             </div>
-            {/* <a className="vitals-label" id="ccb">
-              Calculate calories burned
-            </a> */}
           </section>
+
           <section id="submit" className="submit-info">
             <button className="button">Submit</button>
           </section>
@@ -490,22 +515,13 @@ const Tracker = () => {
         <hr className="rule" />
         <section className="print-report">
           <h2 className="vitals-title">Print report</h2>
-          {/* <div className="report-date">
-            <div>
-              <label htmlFor="">From</label>
-              <input type="date" className="date-input" name="" id="" />
-            </div>
-            <div className="report-field">
-              <label htmlFor="">To</label>
-              <input type="date" className="date-input" name="" id="" />
-            </div>
-          </div> */}
+
           <Link to={"/report"}>
             <button className="">View Reports</button>
           </Link>
         </section>
-      </main>
-    </>
+      </div>
+    </div>
   );
 };
 
