@@ -1,0 +1,142 @@
+/* .slider-container {
+  height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    overflow-x: hidden;
+    position: relative;
+    width: 100vw;
+  }
+  
+  .slider {
+    display: flex;
+    transition: transform 0.3s ease;
+  }
+  
+  .box {
+    width: 500px;
+    height: 300px;
+    margin: 0 10px;
+    background-color: lightblue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+  }
+  
+  .arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    z-index: 10;
+  }
+  
+  .left {
+    left: 0;
+  }
+  
+  .right {
+    right: 0;
+  }
+   */
+
+
+
+  
+
+   
+  .slider__container{
+  height: 100vh;
+  
+}
+   .slider-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+    width: calc(1000px * 3 + 20px * 2); /* 3 boxes + 2 margins */
+    padding-bottom: 50px;
+   
+    height: 62vh;
+  }
+  
+  .slider {
+    display: flex;
+    transition: transform 0.3s ease;
+  }
+  
+  .box {
+    width: 600px;
+    height: 300px;
+    margin: 0 10px;
+    background-color: lightblue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+  }
+  
+  .arrow{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-70%);
+    background: rgba(0, 0, 0, );
+    color: white;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    margin-left: 90px;
+    margin-top: 90px;
+    padding-right: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+  
+  }
+  
+  .left {
+    left: 0;
+  }
+  
+  .right {
+    right: 0;
+  }
+  
+
+  .slider__container h3{    
+    
+   
+     height: 31px;
+     font-family: 'Poppins';
+     font-weight: 500;
+     font-size: 20px;
+     line-height: 130%;
+     color:#0096C7;
+     text-align: center;
+     letter-spacing: 0.56em;
+     padding-top: 80px;
+}
+.slider__container h1{  
+    color:#02035D;
+    font-family: 'Poppins';
+     font-weight: 600;
+     font-size: 35px;
+     text-align: center;
+     padding-top: 40px;
+}
+.slider__container h6{  
+    color:#02035D;
+    font-family: 'Poppins';
+     font-weight: 400;
+     font-size: 14px;
+     text-align: center;
+     padding-top: 20px;
+}

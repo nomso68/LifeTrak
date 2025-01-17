@@ -1,0 +1,93 @@
+.hero{
+    width: 100vw;
+    height: 100%;
+    max-width: 100%;
+    background-image: url("../../assets/hero_image.png");
+    background-repeat: no-repeat;  /* Stops repeating */
+    background-size: cover;        /* Stretches to cover the screen */
+    background-position: center;   /* Centers the image */
+    position: sticky;
+    margin-top: -2px;
+    
+}
+.hero__text{
+    padding: 200px 180px;
+    /* margin-right: 500px; */
+    color: #02035D;
+    font-family: poppins;
+    font-size:15px;
+    /* background-color: green; */
+}
+.hero__text h1{
+    letter-spacing: 2px;
+    font-size:40px;
+    padding-bottom: 10px;
+}
+.hero__text h3{
+    font-size:20px;
+    padding-top: 10px;
+    font-weight: 500;
+    color: black;
+}
+.hero__text h6{
+    font-size:12px;
+    padding-top: 10px;
+    font-weight: 400;
+    color: black;
+}
+.button__container {
+    display: flex;
+    gap: 20px;
+    margin-top: 40px;
+}
+.btn3 {
+    padding: 10px 30px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    background-color: #0096C7;
+    color: rgb(255, 255, 255);
+    transition: background-color 0.3s ease;
+    border-radius: 0px;
+    font-family: poppins;
+    border-radius: 5px;
+}
+.btn4 {
+    padding: 10px 30px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    background-color: #0096C7;
+    color: rgb(255, 255, 255);
+    transition: background-color 0.3s ease;
+    border-radius: 0px;
+    font-family: poppins;
+    border-radius: 5px;
+}
+.btn3:focus {
+    outline: none;
+}
+.btn4:focus {
+    outline: none;
+}
+.btn3:hover{
+    background-color: #02035D;
+    color: #0096C7;
+}
+.btn4:hover{
+    background-color: #02035D;
+    color: #0096C7;
+}
+.hero__support{
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10px;
+    background-color: rgb(34, 31, 60);
+    height: 22vh;
+    padding: 40px;
+   
+}

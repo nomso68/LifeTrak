@@ -1,0 +1,186 @@
+.testimonies_container{
+    height: 110vh;
+    /* background-color: black; */
+}
+
+.testimonies_container h3{    
+    
+    /* TESTIMONIALS */
+     height: 31px;
+     font-family: 'Poppins';
+     font-weight: 500;
+     font-size: 20px;
+     line-height: 130%;
+     color:#0096C7;
+     text-align: center;
+     letter-spacing: 0.56em;
+     padding-top: 80px;
+}
+.testimonies_container h1{  
+    color:#02035D;
+    font-family: 'Poppins';
+     font-weight: 600;
+     font-size: 35px;
+     text-align: center;
+     padding-top: 40px;
+}
+.testimonies_container h6{  
+    color:#02035D;
+    font-family: 'Poppins';
+     font-weight: 400;
+     font-size: 14px;
+     text-align: center;
+     padding-top: 20px;
+}
+
+
+.square__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 squares per row */
+    justify-items: center; /* Centers squares horizontally */
+    align-items: center; /* Centers squares vertically */
+    padding: 0px 80px;
+    margin-top: 55px;
+    /* background-color: red; */
+    gap: 30px;
+    
+}
+.iconx{
+    width: 50px;
+  height: 50px;
+  
+}
+
+.icony{
+    width: 50px;
+  height: 50px;
+  
+}
+.iconz{
+    width: 50px;
+  height: 50px;
+  
+}
+
+.text_icon{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: green;
+    
+    
+}
+.square1 {
+    width: 320px; 
+    height: 260px;
+    justify-items: center; /*Centers the icon horizontally*/
+    align-content: center;
+    background-color: white;
+    /* color: white; */
+    font-size: 20px;
+    border-radius: 20px; /* Optional: round edges */
+    box-shadow: 1px 1px 26px 10px rgba(0, 0, 0, 0.1); /*Optional: shadow effect */
+    transition: transform 0.5s ease, box-shadow 0.5s ease, background-color 0.5s ease;
+    /* padding-bottom: 20px; */
+
+}
+.square1 h3{
+    color: #ffffff;
+    font-family: poppins;
+    font-size: 18px;
+    font-weight: 500;
+    
+    
+}
+.square1 h5{
+    color: black;
+    font-family: poppins;
+    font-size: 12.5px;
+    text-align: left;
+    /* line-height: 1.8; */
+    font-weight: 400;
+    padding: 0px 20px;
+}
+
+.styled_icon {
+    font-size: 13px; /* Adjust size */
+    margin-left: 2px; /* Add space between text and icon */
+    transition: transform 0.3s ease, color 0.3s ease; /* Smooth animation for hover */
+}
+
+
+.square1:hover {
+    transform: translateY(-10px); /* Moves the square upward */
+    transition: transform 0.5s ease-in-out;
+    box-shadow: 1px 1px 26px 10px rgba(0, 225, 255, 0.342);
+    
+}
+
+
+
+.square2 {
+    width: 320px; 
+    height: 260px;
+    justify-items: center; /*Centers the icon horizontally*/
+    align-content: center;
+    background-color: white;
+    font-size: 20px;
+    border-radius: 30px; /* Optional: round edges */
+    box-shadow: 1px 1px 26px 10px rgba(0, 0, 0, 0.1); /*Optional: shadow effect */
+    transition: transform 0.5s ease, box-shadow 0.5s ease, background-color 0.5s ease;
+}
+.square2:hover {
+    transform: translateY(-10px); /* Moves the square upward */
+    transition: transform 0.5s ease-in-out;
+    box-shadow: 1px 1px 26px 10px rgba(0, 225, 255, 0.342);
+}
+.square2 h3{
+    color: #ffffff;
+    font-family: poppins;
+    font-size: 18px;
+    font-weight: 500;
+}
+.square2 h5{
+    color: black;
+    font-family: poppins;
+    font-size: 12.5px;
+    text-align: left;
+    /* line-height: 1.8; */
+    font-weight: 400;
+    padding: 0px 20px;
+}
+
+
+
+
+.square3 {
+    width: 320px; 
+    height: 260px;
+    justify-items: center; /*Centers the icon horizontally*/
+    align-content: center;
+    background-color: white;
+    font-size: 20px;
+    border-radius: 30px; /* Optional: round edges */
+    box-shadow: 1px 1px 26px 10px rgba(0, 0, 0, 0.1); /*Optional: shadow effect */
+    transition: transform 0.5s ease, box-shadow 0.5s ease, background-color 0.5s ease;
+}
+.square3:hover {
+        transform: translateY(-10px); /* Moves the square upward */
+        transition: transform 0.5s ease-in-out;
+        box-shadow: 1px 1px 26px 10px rgba(0, 225, 255, 0.342);
+}
+.square3 h3{
+    color: #ffffff;
+    font-family: poppins;
+    font-size: 17px;
+    font-weight: 500;
+}
+.square3 h5{
+    color: black;
+    font-family: poppins;
+    font-size: 12.5px;
+    text-align: left;
+    /* line-height: 1.8; */
+    font-weight: 400;
+    padding: 0px 20px;
+}

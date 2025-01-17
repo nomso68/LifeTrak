@@ -1,0 +1,88 @@
+.footer__container {
+  background-color: white;
+  /* margin: 0px 100px; */
+}
+
+.footer__container__grid {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(200px, 1fr)
+  ); /* Responsive grid */
+  gap: 40px; /* Space between columns */
+  padding: 25px;
+  color: black; /* Text color */
+  padding-top: 20px;
+}
+
+/* Headings */
+
+.footer__header h3 {
+  font-family: poppins;
+  border-bottom-width: 100px;
+  font-size: 16px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #0096c7; /* Underline effect */
+  padding-bottom: 10px;
+  font-weight: 500;
+}
+
+/* Text */
+.footer__header p {
+  font-size: 15px;
+  margin: 10px 0;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}
+.footer__icon {
+  display: flex;
+  gap: 25px; /* Space between social media icons */
+}
+
+.footer__icon a {
+  color: black;
+  text-decoration: none;
+  font-size: 18px; /* Icon size */
+  transition: color 0.3s ease; /* Smooth hover effect */
+}
+
+.footer__icon a:hover {
+  color: #00acee; /* Change color on hover (e.g., Twitter blue) */
+}
+
+/* List styling */
+.footer__header ul {
+  /* list-style: none; */
+  padding: 0;
+}
+
+.footer__header ul li {
+  margin: 8px 20px;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}
+
+.footer__header ul li a {
+  color: black; /* Link color */
+  text-decoration: none;
+}
+
+.footer__header ul li a:hover {
+  color: black; /* Change color on hover */
+  text-decoration: underline; /* Underline effect */
+}
+.copyright {
+  color: white;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-align: center;
+  background-color: #02035d;
+  /* padding-left: 30px; */
+  margin-top: 92px;
+}
+
+.icon10 {
+  width: 180px;
+  margin-top: 80px;
+  margin-left: 20px;
+}

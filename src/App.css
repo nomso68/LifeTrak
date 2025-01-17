@@ -1,0 +1,16 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  max-width: 100%;
+  /* background-color: red; */
+}
+.container {
+  background-color: white;
+  width: 100%;
+  height: auto;
+}
+
+section {
+  scroll-margin-top: 82px; /* Offset for navbar height */
+}

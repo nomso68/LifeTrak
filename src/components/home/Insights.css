@@ -1,0 +1,107 @@
+.insights__container{
+    height: 85vh;
+    background-color:#02035D;
+}
+
+.insights__container h3{    
+    
+    /* OUR INSIGHTS */
+     height: 31px;
+     font-family: 'Poppins';
+     font-weight: 500;
+     font-size: 20px;
+     line-height: 130%;
+     /* or 31px */
+     text-align: center;
+     letter-spacing: 0.56em;
+     padding-top: 80px;
+}
+
+.insights_info_container{
+    display: flex;
+    /* align-items: center; */
+    /* background-color: red; */
+    padding: 70px 180px;
+    /* gap: 50px; */
+}
+
+.info1{
+    /* background-color: green; */
+    margin-right:100px;
+}
+.info1 h2{
+
+
+}
+.icon6{
+    /* LifeTrak-01 3 */
+    width: 250px;
+    height: 80px;
+}
+
+.info1 h5{
+font-family: poppins;
+font-weight: 300;
+margin-top: 15px;
+}
+
+
+
+.info2{
+    /* background-color: purple; */
+    font-family: poppins;
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 1.2;
+    margin-left:40px;
+    margin-right:40px;
+   
+}
+
+.info2 h1{
+font-weight: 400;
+font-size: 60px;
+padding-top: 30px;
+
+}
+
+.info2 p{
+padding-bottom: 50px;
+}
+
+.info2 h2{
+    font-weight: 400;
+    font-size: 60px;
+    padding-top: 10px;
+}
+
+
+
+
+.info3{
+    /* background-color: red; */
+    font-family: poppins;
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 1.2;
+    margin-right: 40px;
+    margin-right: 40px; 
+   
+}
+
+.info3 h1{
+font-weight: 400;
+font-size: 60px;
+padding-top: 30px;
+
+}
+
+.info3 p{
+padding-bottom: 20px;
+}
+
+.info3 h2{
+    font-weight: 400;
+    font-size: 60px;
+    padding-top: 10px;
+}
