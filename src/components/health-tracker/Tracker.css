@@ -203,6 +203,10 @@
   .vitals-row {
     gap: 1rem;
   }
+
+  .print-report {
+    flex-direction: row;
+  }
 }
 
 @media (max-width: 480px) {
@@ -221,8 +225,9 @@
 
 .print-report {
   display: flex;
-  flex-direction: column;
-  gap: 3.5rem;
+  flex-direction: row;
+
+  gap: 4rem;
 }
 
 .notif {

@@ -3,7 +3,7 @@
   width: 100%;
   height: auto;
   padding: 120px 150px 50px;
-  font-family: poppins;
+  font-family: Poppins, sans-serif;
 }
 
 .profile-bg label {
@@ -11,7 +11,7 @@
 }
 
 .profile-details {
-  font-family: poppins;
+  font-family: Poppins, sans-serif;
   font-size: 2.5rem;
   font-weight: 400;
   line-height: 3.25rem;
@@ -20,7 +20,7 @@
 }
 
 .img-container {
-  border-radius: 12.5rem;
+  border-radius: 50%;
   width: 25rem;
   height: 25rem;
   background-color: #0096c733;
@@ -69,12 +69,15 @@
 .profile-field div {
   display: flex;
   gap: 1.75rem;
+  flex-wrap: wrap;
 }
 
 .edit {
   border: 1px solid #6b7588;
   border-radius: 1rem;
   background: transparent;
+  padding: 0.5rem 1rem;
+  font-size: 1.5rem;
 }
 
 .other-details {
@@ -104,4 +107,115 @@
 
 .max {
   width: 5.375rem;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 1200px) {
+  .profile-bg {
+    padding: 100px 100px 50px;
+  }
+
+  .profile-details {
+    font-size: 2rem;
+    line-height: 2.75rem;
+  }
+
+  .img-container {
+    width: 20rem;
+    height: 20rem;
+  }
+
+  .profile-field label,
+  .email-field label {
+    font-size: 1.75rem;
+    line-height: 2.75rem;
+  }
+
+  .profile-field input,
+  .email-field p {
+    font-size: 1.5rem;
+    padding: 0.5rem 2rem;
+  }
+
+  .edit {
+    font-size: 1.25rem;
+    padding: 0.4rem 0.8rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .profile-bg {
+    padding: 80px 50px 30px;
+  }
+
+  .profile-details {
+    font-size: 1.75rem;
+    line-height: 2.5rem;
+  }
+
+  .img-container {
+    width: 15rem;
+    height: 15rem;
+  }
+
+  .profile-field label,
+  .email-field label {
+    font-size: 1.5rem;
+    line-height: 2.25rem;
+  }
+
+  .profile-field input,
+  .email-field p {
+    font-size: 1.25rem;
+    padding: 0.4rem 1.5rem;
+  }
+
+  .edit {
+    font-size: 1rem;
+    padding: 0.3rem 0.6rem;
+  }
+
+  .other-details {
+    display: block;
+    margin-right: 0;
+    margin-bottom: 1rem;
+  }
+
+  .profile-field div {
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .profile-bg {
+    padding: 50px 20px 20px;
+  }
+
+  .profile-details {
+    font-size: 1.5rem;
+    line-height: 2rem;
+    margin-bottom: 4rem;
+  }
+
+  .img-container {
+    width: 12rem;
+    height: 12rem;
+  }
+
+  .profile-field label,
+  .email-field label {
+    font-size: 1.25rem;
+    line-height: 2rem;
+  }
+
+  .profile-field input,
+  .email-field p {
+    font-size: 1rem;
+    padding: 0.3rem 1rem;
+  }
+
+  .edit {
+    font-size: 0.875rem;
+    padding: 0.25rem 0.5rem;
+  }
 }

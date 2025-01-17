@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./Tracker.css";
 import Bell1 from "./Bell1";
 import ChevronDown from "./ChevronDown";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const Tracker = () => {
   const navigate = useNavigate();
@@ -81,25 +81,25 @@ const Tracker = () => {
       return;
     }
 
-    if (formData.exerciseLog.cycling < (1 || null || undefined)) {
+    if (formData.exerciseLog.cycling < 1) {
       window.alert("Rope Skipping counts must be a non-negative integer");
       return;
-    } else if (formData.exerciseLog.ropeSkipping < (1 || null || undefined)) {
+    } else if (formData.exerciseLog.ropeSkipping < 1) {
       window.alert("Cycling distance must be a positive number");
       return;
-    } else if (formData.exerciseLog.yoga < (1 || null || undefined)) {
+    } else if (formData.exerciseLog.yoga < 1) {
       window.alert("Yoga duration must be a non-negative integer (minutes)");
       return;
-    } else if (formData.exerciseLog.walking < (1 || null || undefined)) {
+    } else if (formData.exerciseLog.walking < 1) {
       window.alert("Walking distance must be a positive number");
       return;
-    } else if (formData.exerciseLog.jogging < (1 || null || undefined)) {
+    } else if (formData.exerciseLog.jogging < 1) {
       window.alert("Jogging distance must be a positive number");
       return;
-    } else if (formData.exerciseLog.running < (1 || null || undefined)) {
+    } else if (formData.exerciseLog.running < 1) {
       window.alert("Running distance must be a positive number");
       return;
-    } else if (formData.exerciseLog.dance < (1 || null || undefined)) {
+    } else if (formData.exerciseLog.dance < 1) {
       window.alert("Dance duration must be a non-negative integer (minutes)");
       return;
     } else if (
@@ -151,16 +151,17 @@ const Tracker = () => {
           if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
           }
-          console.log(response.json());
-          navigate("/report");
           return response.json();
         })
         .then((data) => {
           console.log("Data saved successfully:", data);
-          // navigate("/report");
+          navigate("/report");
+        })
+        .catch((error) => {
+          console.error("Error saving data:", error);
         });
     } catch (error) {
-      console.error("Error saving data:", error);
+      console.error("Error submitting form:", error);
     }
   };
 
@@ -171,7 +172,7 @@ const Tracker = () => {
           <section className="hayft">
             <div className="a1">
               <h1 className="tracker-title">How are you feeling today?</h1>
-              <div className="a2">
+              <Link to={"/profile"} className="a2">
                 <p>Edit Personal Data</p>
                 <span className="notif">
                   <div className="bell">
@@ -179,7 +180,7 @@ const Tracker = () => {
                   </div>
                   <div className="dot"></div>
                 </span>
-              </div>
+              </Link>
             </div>
             <div className="a1">
               <p className="subtitle">Log your health stats for today!</p>
@@ -324,13 +325,11 @@ const Tracker = () => {
                 </div>
                 <span className="parameter">
                   <input
-                    min={0}
-                    max={30}
                     id="bloodGlucoseLevel"
                     name="bloodGlucoseLevel"
                     value={formData.vitals.bloodGlucoseLevel}
                     onChange={handleChange}
-                    type="number"
+                    type="text"
                   />
                   <p>mmol/L</p>
                 </span>
@@ -491,7 +490,7 @@ const Tracker = () => {
         <hr className="rule" />
         <section className="print-report">
           <h2 className="vitals-title">Print report</h2>
-          <div className="report-date">
+          {/* <div className="report-date">
             <div>
               <label htmlFor="">From</label>
               <input type="date" className="date-input" name="" id="" />
@@ -500,7 +499,10 @@ const Tracker = () => {
               <label htmlFor="">To</label>
               <input type="date" className="date-input" name="" id="" />
             </div>
-          </div>
+          </div> */}
+          <Link to={"/report"}>
+            <button className="">View Reports</button>
+          </Link>
         </section>
       </main>
     </>

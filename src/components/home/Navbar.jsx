@@ -107,7 +107,7 @@ const Navbar = ({ login }) => {
             <Link to={"/login"}>
               <button className="btn1">Login</button>
             </Link>
-          )} 
+          )}
           <Link to={"/register"}>
             <button className="btn2">Sign Up</button>
           </Link>
@@ -120,11 +120,10 @@ const Navbar = ({ login }) => {
               <img src={profile} alt="" />
             </div>
           </Link>
-          {window.innerWidth > 992 && (
-            <button onClick={handleLogout} className="sign-out">
-              Sign Out
-            </button>
-          )}
+
+          <button onClick={handleLogout} className="sign-out">
+            Sign Out
+          </button>
         </div>
       )}
     </div>
