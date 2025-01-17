@@ -1,60 +1,63 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./Navbar.css";
 import Logo from "../../assets/LifeLogo.png";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import profile from "../../assets/profile.png";
 import MenuHamburger1 from "./MenuHamburger1";
 
-const Navbar = ({ login }) => {
-  const [menu, setMenu] = useState(true);
-  const handleMenu = () => {
-    setMenu(!menu);
-    console.log(menu);
-  };
+const Navbar = () => {
+  const [menu, setMenu] = useState(window.innerWidth > 992);
+  const [userId, setUserId] = useState(localStorage.getItem("user") || "");
+  const location = useLocation(); // React Router's hook to get the current location
+
+  // Handle menu visibility based on screen size
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth > 992) {
-        setMenu(true);
-      } else {
-        setMenu(false);
-      }
+      setMenu(window.innerWidth > 992);
     };
 
-    handleResize();
-
     window.addEventListener("resize", handleResize);
-
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-  const [userId, setUserId] = useState(localStorage.getItem("user") || ""); // Initialize with stored userId or empty string
 
-  const handleLogout = () => {
+  // Synchronize userId with localStorage
+  useEffect(() => {
     const storedUserId = localStorage.getItem("user");
-    if (storedUserId) {
+    if (storedUserId !== userId) {
       setUserId(storedUserId);
-    } else {
-      console.error("User ID not found in local storage.");
-      return;
     }
+  }, [userId]);
+
+  const handleMenu = () => {
+    setMenu((prevMenu) => !prevMenu);
+  };
+
+  const handleLogout = async () => {
     try {
-      fetch("https://lifetrak.onrender.com/api/auth/logout", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ userId: userId }),
-      }).then((response) => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
+      const response = await fetch(
+        "https://lifetrak.onrender.com/api/auth/logout",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ userId }),
         }
-        localStorage.removeItem("user");
-        setUserId("");
-        window.location.href = "/";
-      });
+      );
+
+      if (!response.ok) {
+        throw new Error(`Logout failed: ${response.status}`);
+      }
+
+      // Clear user data
+      localStorage.removeItem("user");
+      setUserId("");
+      window.location.href = "/";
     } catch (error) {
-      console.error("Error saving data:", error);
+      console.error("Error during logout:", error);
     }
   };
+
   return (
     <div className="navbar">
       {window.innerWidth <= 992 && (
@@ -62,15 +65,17 @@ const Navbar = ({ login }) => {
           <MenuHamburger1 />
         </button>
       )}
+
       <div className="logo">
-        <Link to={"/"}>
+        <Link to="/">
           <img src={Logo} alt="Logo" />
         </Link>
       </div>
+
       <div className="menu">
         <ul className={`navbar__ul ${menu ? "show" : ""}`}>
           <li>
-            <Link to={"/"} className="nav-link">
+            <Link to="/" className="nav-link">
               Home
             </Link>
           </li>
@@ -101,26 +106,25 @@ const Navbar = ({ login }) => {
           </li>
         </ul>
       </div>
-      {!userId && (
+
+      {!userId ? (
         <div className="bt">
-          {window.location.href.slice(-5) !== "login" && (
-            <Link to={"/login"}>
+          {location.pathname !== "/login" && (
+            <Link to="/login">
               <button className="btn1">Login</button>
             </Link>
           )}
-          <Link to={"/register"}>
+          <Link to="/register">
             <button className="btn2">Sign Up</button>
           </Link>
         </div>
-      )}
-      {userId && (
+      ) : (
         <div className="bt">
-          <Link to={"/profile"}>
+          <Link to="/profile">
             <div className="avatar">
-              <img src={profile} alt="" />
+              <img src={profile} alt="User Avatar" />
             </div>
           </Link>
-
           <button onClick={handleLogout} className="sign-out">
             Sign Out
           </button>
