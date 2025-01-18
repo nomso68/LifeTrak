@@ -27,11 +27,12 @@ const Testimonies = () => {
             {/* <h3>Instant Consultation</h3> */}
           </div>
           <h5>
-            “As someone managing asthma, this tracker has been a game-changer.
-            It helps me monitor triggers, track symptoms, and stay consistent
-            with my medication. The reminders and health insights have made
-            managing my condition so much easier. I finally feel in control of
-            my health!”
+            Emily R. - Fitness Enthusiast* "I’ve been using this health tracker
+            for six months now, and it’s been a game-changer! It’s incredibly
+            easy to use, and I love how it keeps me accountable to my fitness
+            goals. Tracking my daily steps, workouts, and water intake has never
+            been this simple. Highly recommend it to anyone looking to improve
+            their health!"
           </h5>
         </div>
 
@@ -42,11 +43,11 @@ const Testimonies = () => {
           </div>
           <h5>
             {" "}
-            I thought it was too late to turn my health around, but this tracker
-            proved me wrong. It helped me stay consistent with my fitness goals,
-            reminded me to take my medications, and even improved my sleep
-            patterns. The personalized features made it easy to stick with, and
-            now I feel better than I have in years!"
+            John M. - Weight Loss Journey* "This health tracker has been
+            instrumental in my weight loss journey. By monitoring my calorie
+            intake and physical activity, I’ve managed to lose 20 pounds in
+            three months. The insights and tips provided are incredibly helpful.
+            Thank you for helping me transform my lifestyle!"
           </h5>
         </div>
 
@@ -56,10 +57,11 @@ const Testimonies = () => {
             {/* <h3>Personalized Fitness Plans</h3> */}
           </div>
           <h5>
-            At 74, keeping track of my health felt overwhelming, but this
-            tracker has made it so simple. From reminders for my medications to
-            tracking my daily walks, it’s been a blessing. I feel more
-            independent and confident about my health now.
+            Sarah L. - Busy Professional* "As a busy professional, I struggle to
+            find time for my health. This tracker keeps me on top of my fitness
+            routine, even with my hectic schedule. I particularly love the sleep
+            tracking feature, which has helped me improve my sleep quality. It’s
+            like having a personal health coach in my pocket!"
           </h5>
         </div>
       </div>

@@ -18,23 +18,6 @@
   padding-right: 240px;
 }
 
-@media screen and (max-width: 480px) {
-  .loginbg {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 60px 0 30px;
-  }
-
-  .submit {
-    padding: 0 20px 0;
-  }
-
-  .field {
-    padding-left: 25px;
-  }
-}
-
 .loginbg2 {
   background-color: white;
   width: 100%;
@@ -107,6 +90,40 @@
   justify-content: start;
   flex-direction: column;
   margin-bottom: 50px;
+}
+
+@media screen and (max-width: 960px) {
+  .loginbg {
+    padding: 50px 0 50px 110px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .loginbg {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 60px 0 30px;
+  }
+
+  .submit {
+    padding: 0 20px 0;
+  }
+
+  .field {
+    padding-left: 25px;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto 50px;
+  }
+
+  .password {
+    width: 100%;
+  }
+
+  .submit {
+    gap: 50px;
+  }
 }
 
 .transparent {

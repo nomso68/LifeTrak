@@ -7,7 +7,7 @@ const Sign_Up = () => {
     fullName: "",
     email: "",
     dateOfBirth: "",
-    gender: "Male",
+    gender: "",
     weight: "",
     height: "",
     username: "",
