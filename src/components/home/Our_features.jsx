@@ -15,8 +15,8 @@ const Our_features = () => {
         <h1>Simplify your wellness with these tools</h1>
       </div>
 
-      <div className="square__grid">
-        <div className="square1">
+      <div className="square_grid">
+        {/* <div className="square1">
           <div className="text_icon">
             <img className="icon1" src={jam_medical} alt="icon" />
             <h3>Instant Consultation</h3>
@@ -37,9 +37,9 @@ const Our_features = () => {
               Start Now <i class="fas fa-angle-right styled_icon"></i>
             </h2>
           </a>
-        </div>
+        </div> */}
 
-        <Link to={"/tracker"}>
+        <Link className="tracker_btn" to={"/tracker"}>
           <div className="square2">
             <div className="text_icon">
               <img className="icon2" src={wave} alt="icon" />
@@ -63,7 +63,7 @@ const Our_features = () => {
           </div>
         </Link>
 
-        <div className="square3">
+        {/* <div className="square3">
           <div className="text_icon">
             <img className="icon3" src={medbrief} alt="icon" />
             <h3>Personalized Fitness Plans</h3>
@@ -83,11 +83,11 @@ const Our_features = () => {
               Start Now <i class="fas fa-angle-right styled_icon"></i>
             </h2>
           </a>
-        </div>
+        </div> */}
       </div>
 
       <div className="square2__grid">
-        <div className="square4">
+        {/* <div className="square4">
           <div className="text_icon">
             <img className="icon4" src={reminder} alt="icon" />
             <h3>Health Reminder</h3>
@@ -107,9 +107,9 @@ const Our_features = () => {
               Start Now <i class="fas fa-angle-right styled_icon"></i>
             </h2>
           </a>
-        </div>
+        </div> */}
 
-        <div className="square5">
+        {/* <div className="square5">
           <div className="text_icon">
             <img className="icon5" src={wifi} alt="icon" />
             <h3>Offline Access</h3>
@@ -129,7 +129,7 @@ const Our_features = () => {
               Start Now <i class="fas fa-angle-right styled_icon"></i>
             </h2>
           </a>
-        </div>
+        </div> */}
       </div>
     </div>
   );
