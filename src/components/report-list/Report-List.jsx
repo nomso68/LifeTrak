@@ -97,11 +97,15 @@ const ReportList = () => {
         );
 
         if (!response.ok) {
+          console.log(response);
+
           localStorage.removeItem("user");
           navigate("/login");
           throw new Error(`Error: ${response.status} ${response.statusText}`);
         }
         const data = await response.json();
+        console.log(data);
+
         setLoading(false);
         setreportData(data);
       } catch (error) {
