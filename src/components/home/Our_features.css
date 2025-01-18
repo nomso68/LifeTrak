@@ -5,12 +5,11 @@
 }
 
 .feat__container {
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: auto;
   position: sticky;
   background-color: rgb(255, 255, 255);
   padding: 50px 0px;
-  height: 130vh;
 }
 .services__info {
   width: 42%;
@@ -22,7 +21,7 @@
 .services__info h1 {
   /* Simplify your wellness with these tools */
   color: #02035d;
-  margin: 15px;
+  /* margin: 15px; */
 
   width: 100%;
   /* section description */
@@ -30,7 +29,9 @@
   font-style: normal;
   font-weight: 600;
   font-size: 25px;
-  line-height: 30%;
+  margin: 0;
+  line-height: 2rem;
+  text-align: center;
   /* or 57px */
 
   /* Primary */
@@ -51,9 +52,9 @@
   color: #0096c7;
 }
 
-.square__grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 squares per row */
+.square_grid {
+  /* display: grid;
+  grid-template-columns: repeat(3, 1fr);  */
   justify-items: center; /* Centers squares horizontally */
   align-items: center; /* Centers squares vertically */
   padding: 0px 180px;
@@ -67,6 +68,25 @@
   padding: 0px 320px;
   margin-top: 25px;
 }
+
+@media (max-width: 480px) {
+  .services__info {
+    margin: 0;
+    padding: 10px;
+    width: 100%;
+  }
+
+  .services__info h1 {
+    margin: 0;
+    line-height: 2rem;
+    text-align: center;
+  }
+
+  .square_grid {
+    padding: 0 20px;
+  }
+}
+
 .icon1 {
   width: 35px;
   height: 35px;
@@ -146,6 +166,11 @@
   transform: translateY(-10px); /* Moves the square upward */
   transition: transform 0.5s ease-in-out;
   box-shadow: 1px 1px 26px 10px rgba(0, 225, 255, 0.342);
+}
+
+.tracker_btn {
+  display: flex;
+  justify-content: center;
 }
 
 .square2 {
