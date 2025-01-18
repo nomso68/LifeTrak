@@ -16,27 +16,26 @@ const AuthGuard = ({ children, isDataAnalystRoute = false }) => {
   if (isDataAnalystRoute) {
     const handleCodeSubmit = async (e) => {
       e.preventDefault();
-      const secretCode = code;
 
-      // Send the code to the backend in the request headers
       try {
         const response = await fetch(
-          "https://lifetrak.onrender.com/api/health-stats",
+          "https://lifetrak.onrender.com/validate-code",
           {
-            method: "GET", // Use GET to align with your backend route
+            method: "POST",
             headers: {
               "Content-Type": "application/json",
-              "x-analytics-code": secretCode, // Send the secret code in the headers
             },
+            body: JSON.stringify({ code }), // Send the code in the request body
           }
         );
 
         if (response.ok) {
-          alert("Successful"); // Inform the user that the code is correct
-          // If the code is valid, allow access to the page
+          const data = await response.json();
+          alert(data.message); // Display success message
           navigate("/health-stats"); // Redirect to the health stats page
         } else {
-          setError("Invalid code. Access denied.");
+          const data = await response.json();
+          setError(data.message); // Display error message
         }
       } catch (error) {
         console.error("Error during code validation:", error);

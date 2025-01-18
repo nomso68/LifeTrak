@@ -534,9 +534,9 @@ const Tracker = () => {
           <Link to={"/report"}>
             <button className="">View Reports</button>
           </Link>
-          <Link to={"/health-stats"}>
+          {/* <Link to={"/health-stats"}>
             <button className="">View All Reports</button>
-          </Link>
+          </Link> */}
         </section>
       </div>
     </div>
