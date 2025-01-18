@@ -26,12 +26,12 @@ const Landing = () => {
         </section>
 
         {/* <section id="Testimonies">
-        <Testimonies/>
+          <Testimonies />
         </section> */}
 
-        <section id="Blog">
+        {/* <section id="Blog">
           <Slider />
-        </section>
+        </section> */}
 
         <section id="Sign">
           <Sign />

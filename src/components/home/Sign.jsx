@@ -24,7 +24,7 @@ const Sign = () => {
             <button className="butn1">Sign Up Now</button>
           </Link>
         </div>
-        <div>
+        <div className="image_container">
           <img className="image" src={imageman} alt="image" />
         </div>
       </div>
