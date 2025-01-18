@@ -41,7 +41,7 @@ const Our_features = () => {
 
         <Link className="tracker_btn" to={"/tracker"}>
           <div className="square2">
-            <div className="text_icon">
+            <div className="text_icon2">
               <img className="icon2" src={wave} alt="icon" />
               <h3>Health Tracking</h3>
             </div>
