@@ -1,12 +1,17 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import "./Tracker.css";
 import Bell1 from "./Bell1";
 import ChevronDown from "./ChevronDown";
 import { useNavigate, Link } from "react-router-dom";
+import { AuthContext } from "../../../utils/AuthContext";
 
 const Tracker = () => {
   const navigate = useNavigate();
-  const [userId, setUserId] = useState(localStorage.getItem("user") || "");
+  const { userInfo } = useContext(AuthContext);
+  console.log(userInfo);
+  // console.log(userHealthInfo);
+  const userId = userInfo?.userId;
+  console.log(userId);
   const [patientName, setPatientName] = useState("");
 
   const getCurrentDate = () => {
@@ -528,6 +533,9 @@ const Tracker = () => {
 
           <Link to={"/report"}>
             <button className="">View Reports</button>
+          </Link>
+          <Link to={"/health-stats"}>
+            <button className="">View All Reports</button>
           </Link>
         </section>
       </div>

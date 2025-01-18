@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
+import * as XLSX from "xlsx";
 import "./Report-List.css";
 import Funnel1 from "./Funnel1";
 import Search1 from "./Search1";
 import Doc1 from "./Doc1";
 import BarChart4 from "./BarChart4";
-// import { reportData } from "./Report-Data";
-import ArrowLeft from "./ArrowLeft";
-import ArrowRight from "./ArrowRight";
 import { useNavigate } from "react-router-dom";
 
 const Report = ({ item, i }) => {
@@ -70,32 +68,6 @@ function calcTime(time) {
   }
 }
 
-const Pagination = () => {
-  return (
-    <>
-      <div className="pagination">
-        <button className="page-change">
-          <ArrowLeft />
-          Previous
-        </button>
-        <div className="page-numbers">
-          <button className="bg-color">1</button>
-          <button className="bg-color">2</button>
-          <button className="bg-color">...</button>
-          <button className="bg-color">10</button>
-          <button className="bg-color">11</button>
-          <button className="bg-color">12</button>
-          <button className="bg-color">13</button>
-        </div>
-        <button className="page-change">
-          Next
-          <ArrowRight />
-        </button>
-      </div>
-    </>
-  );
-};
-
 const ReportDates = ({ item, i }) => {
   return (
     <tr>
@@ -105,10 +77,6 @@ const ReportDates = ({ item, i }) => {
     </tr>
   );
 };
-//   return (
-
-//   );
-// };
 
 const ReportList = () => {
   const navigate = useNavigate();
@@ -132,8 +100,6 @@ const ReportList = () => {
         }
         const data = await response.json();
         setreportData(data);
-        console.log(data);
-        console.log(reportData);
       } catch (error) {
         window.alert("Please Log In");
       }
@@ -141,6 +107,48 @@ const ReportList = () => {
 
     fetchReportData();
   }, []);
+
+  const exportToExcel = () => {
+    const headers = [
+      "Blood Temp.",
+      "Pulse Rate",
+      "Resp. Rate",
+      "Blood Pressure",
+      "Blood Oxygen",
+      "Body Weight",
+      "Blood Glucose",
+      "Walking",
+      "Jogging",
+      "Running",
+      "Cycling",
+      "Skipping",
+      "Yoga",
+      "Dance",
+    ];
+
+    const rows = reportData.map((item) => [
+      item.vitals.bloodTemp || "-",
+      item.vitals.pulseRate || "-",
+      item.vitals.respRate || "-",
+      item.vitals.bloodPressure || "-",
+      `${item.vitals.bloodOxygen}%` || "-",
+      item.vitals.bodyWeight ? `${item.vitals.bodyWeight}kg` : "-",
+      item.vitals.bloodGlucose ? `${item.vitals.bloodGlucose}mg/DL` : "-",
+      item.exerciseLog.walking ? `${item.exerciseLog.walking}km` : "-",
+      item.exerciseLog.jogging ? `${item.exerciseLog.jogging}km` : "-",
+      item.exerciseLog.running ? `${item.exerciseLog.running}km` : "-",
+      item.exerciseLog.cycling ? `${item.exerciseLog.cycling}km` : "-",
+      item.exerciseLog.skipping ? `${item.exerciseLog.skipping} counts` : "-",
+      item.exerciseLog.yoga ? calcTime(item.exerciseLog.yoga) : "-",
+      item.exerciseLog.dance ? calcTime(item.exerciseLog.dance) : "-",
+    ]);
+
+    const ws = XLSX.utils.aoa_to_sheet([headers, ...rows]);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "Report Data");
+    XLSX.writeFile(wb, "ReportData.xlsx");
+  };
+
   return (
     <div className="main-tracker">
       <div className="trackerbg">
@@ -166,15 +174,7 @@ const ReportList = () => {
             </button>
           </div>
           <div className="filters-right">
-            {/* <div>
-              <Search1 />
-              <input type="text" id="search" placeholder="Search..." />
-            </div> */}
-            <button>
-              <Doc1 />
-              <p className="export">Export PDF</p>
-            </button>
-            <button>
+            <button onClick={exportToExcel}>
               <BarChart4 />
               <p className="export">Export Excel</p>
             </button>
@@ -193,7 +193,7 @@ const ReportList = () => {
               ))}
             </tbody>
           </table>
-          <table className="">
+          <table>
             <thead>
               <tr className="report-header">
                 <th>Blood Temp.</th>
@@ -219,7 +219,6 @@ const ReportList = () => {
             </tbody>
           </table>
         </div>
-        {/* <Pagination /> */}
       </div>
     </div>
   );

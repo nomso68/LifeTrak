@@ -1,0 +1,9 @@
+const ReportDates = ({ item, i }) => {
+  return (
+    <tr>
+      <td className={i % 2 === 0 ? "" : "even"}>
+        {item.date.slice(0, 10) || "-"}
+      </td>
+    </tr>
+  );
+};
