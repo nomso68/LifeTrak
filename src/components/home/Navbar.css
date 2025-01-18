@@ -130,7 +130,8 @@ html {
 
 .bt {
   display: flex;
-  gap: 1rem;
+  align-items: center;
+  gap: 0.8rem;
 }
 
 /* Responsive Design */

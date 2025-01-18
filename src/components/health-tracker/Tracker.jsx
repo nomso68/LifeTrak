@@ -232,6 +232,7 @@ const Tracker = () => {
                 value={selectedDate}
                 onChange={handleDateChange}
                 className="date-input"
+                placeholder="DD/MM/YYYY"
               />
             </div>
           </section>
