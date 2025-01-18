@@ -120,6 +120,7 @@ const Tracker = () => {
     try {
       // Convert string values to numbers where applicable
       const convertedFormData = {
+        userId: userId, // Make sure this is included
         ...formData,
         vitals: {
           ...formData.vitals,
@@ -569,9 +570,9 @@ const Tracker = () => {
                 <Link to={"/report"}>
                   <button className="report_button">View Reports</button>
                 </Link>
-                {/* <Link to={"/health-stats"}>
+                <Link to={"/health-stats"}>
                   <button className="report_button">View All Reports</button>
-                </Link> */}
+                </Link>
               </section>
             </form>
             {/* <hr className="rule" />

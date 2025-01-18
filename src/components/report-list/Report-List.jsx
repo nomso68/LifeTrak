@@ -78,7 +78,7 @@ const ReportList = () => {
             bloodPressure: item.vitals?.bloodPressure || "N/A",
             bloodOxygen: item.vitals?.bloodOxygen || "N/A",
             bodyWeight: item.vitals?.weight || "N/A",
-            bloodGlucose: item.vitals?.bloodGlucose || "N/A",
+            bloodGlucose: item.vitals?.bloodGlucoseLevel || "N/A",
           },
           exerciseLog: {
             walking: item.exerciseLog?.walking || "N/A",
