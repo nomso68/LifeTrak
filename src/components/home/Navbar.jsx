@@ -5,10 +5,12 @@ import { Link } from "react-router-dom";
 import profile from "../../assets/profile.png";
 import MenuHamburger1 from "./MenuHamburger1";
 import { AuthContext } from "../../../utils/AuthContext";
+import { Circles } from "react-loader-spinner";
 
 const Navbar = () => {
   const [menu, setMenu] = useState(true);
   const { userInfo, logout } = useContext(AuthContext);
+  const [submitting, setSubmitting] = useState(false);
 
   const handleMenu = () => {
     setMenu((prevMenu) => !prevMenu);
@@ -26,7 +28,9 @@ const Navbar = () => {
   }, []);
 
   const handleLogout = async () => {
+    setSubmitting(true);
     await logout();
+    setSubmitting(false);
     window.location.href = "/";
   };
 
@@ -95,7 +99,21 @@ const Navbar = () => {
             </div>
           </Link>
           <button onClick={handleLogout} className="sign-out">
-            Sign Out
+            {submitting ? (
+              <div className="loader2">
+                <Circles
+                  height="40"
+                  width="40"
+                  color="#fff"
+                  ariaLabel="circles-loading"
+                  wrapperStyle={{}}
+                  wrapperClass=""
+                  visible={true}
+                />
+              </div>
+            ) : (
+              "Sign Out"
+            )}{" "}
           </button>
         </div>
       )}

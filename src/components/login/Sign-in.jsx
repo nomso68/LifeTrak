@@ -6,12 +6,14 @@ import Locked2 from "./Locked2";
 import User4 from "./User4";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../utils/AuthContext";
+import { Circles } from "react-loader-spinner";
 
 const SignIn = () => {
   const navigate = useNavigate();
   const { setUserInfo } = useContext(AuthContext);
   const [forgotEmail, setForgotEmail] = useState("");
   const [showForgotModal, setShowForgotModal] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const [form, setForm] = useState({
     username: "",
     password: "",
@@ -28,7 +30,7 @@ const SignIn = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    setSubmitting(true);
     try {
       const response = await fetch(
         "https://lifetrak.onrender.com/api/auth/login",
@@ -47,6 +49,7 @@ const SignIn = () => {
       }
 
       const data = await response.json();
+      setSubmitting(false);
       setUserInfo(data);
       // Update user state
       setUser(data.userId);
@@ -54,6 +57,7 @@ const SignIn = () => {
       console.log(user);
       navigate("/tracker");
     } catch (error) {
+      setSubmitting(false);
       console.error("Error saving data:", error.message);
     }
   };
@@ -128,7 +132,23 @@ const SignIn = () => {
             >
               Forgot Password
             </button>
-            <button className="button">Login</button>
+            <button className="button">
+              {!submitting ? (
+                "Login"
+              ) : (
+                <div className="loader2">
+                  <Circles
+                    height="40"
+                    width="40"
+                    color="#fff"
+                    ariaLabel="circles-loading"
+                    wrapperStyle={{}}
+                    wrapperClass=""
+                    visible={true}
+                  />
+                </div>
+              )}
+            </button>
           </div>
         </form>
       </main>

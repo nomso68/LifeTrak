@@ -2,7 +2,7 @@
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
-  max-width: 100%;
+  /* max-width: 100%; */
   /* background-color: red; */
 }
 .container {
@@ -13,4 +13,23 @@
 
 section {
   scroll-margin-top: 82px; /* Offset for navbar height */
+}
+
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: transparent;
+}
+
+.loader2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+}
+
+.loader2 div {
+  justify-content: center;
 }

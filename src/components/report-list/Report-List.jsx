@@ -6,6 +6,7 @@ import Search1 from "./Search1";
 import Doc1 from "./Doc1";
 import BarChart4 from "./BarChart4";
 import { useNavigate } from "react-router-dom";
+import { Circles } from "react-loader-spinner";
 
 const Report = ({ item, i }) => {
   return (
@@ -81,9 +82,11 @@ const ReportDates = ({ item, i }) => {
 const ReportList = () => {
   const navigate = useNavigate();
   const [reportData, setreportData] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchReportData = async () => {
+      setLoading(true);
       try {
         const response = await fetch(
           "https://lifetrak.onrender.com/api/healthstats",
@@ -94,11 +97,16 @@ const ReportList = () => {
         );
 
         if (!response.ok) {
+          console.log(response);
+
           localStorage.removeItem("user");
           navigate("/login");
           throw new Error(`Error: ${response.status} ${response.statusText}`);
         }
         const data = await response.json();
+        console.log(data);
+
+        setLoading(false);
         setreportData(data);
       } catch (error) {
         window.alert("Please Log In");
@@ -152,73 +160,98 @@ const ReportList = () => {
   return (
     <div className="main-tracker">
       <div className="trackerbg">
-        <h1 className="report-heading">Report List</h1>
-        <div className="filters">
-          <div className="filters-left">
-            <div>
-              <select name="from" id="from">
-                <option selected value="allTime">
-                  All Time
-                </option>
-              </select>
-            </div>
-            <div>
-              <select name="to" id="to">
-                <option selected value="allTime">
-                  All Time
-                </option>
-              </select>
-            </div>
-            <button className="funnel">
-              <Funnel1 />
-            </button>
+        {loading ? (
+          <div className="loader">
+            <Circles
+              height="40"
+              width="40"
+              color="#02035d"
+              ariaLabel="circles-loading"
+              wrapperStyle={{}}
+              wrapperClass=""
+              visible={true}
+            />
           </div>
-          <div className="filters-right">
-            <button onClick={exportToExcel}>
-              <BarChart4 />
-              <p className="export">Export Excel</p>
-            </button>
+        ) : (
+          <div>
+            <h1 className="report-heading">Report List</h1>
+            <div className="filters">
+              <div className="filters-left">
+                <div>
+                  <select name="from" id="from">
+                    <option selected value="allTime">
+                      All Time
+                    </option>
+                  </select>
+                </div>
+                <div>
+                  <select name="to" id="to">
+                    <option selected value="allTime">
+                      All Time
+                    </option>
+                  </select>
+                </div>
+                <button className="funnel">
+                  <Funnel1 />
+                </button>
+              </div>
+              <div className="filters-right">
+                {/* <div>
+              <Search1 />
+              <input type="text" id="search" placeholder="Search..." />
+            </div> */}
+                <button onClick={exportToExcel}>
+                  <Doc1 />
+                  <p className="export">Export PDF</p>
+                </button>
+                <button>
+                  <BarChart4 />
+                  <p className="export">Export Excel</p>
+                </button>
+              </div>
+            </div>
+            <div className="table-div">
+              <table className="date-table">
+                <thead>
+                  <tr>
+                    <th className="date-heading"> Date </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {reportData.map((item, index) => (
+                    <ReportDates item={item} i={index} key={index} />
+                  ))}
+                </tbody>
+              </table>
+              <table className="">
+                <thead>
+                  <tr className="report-header">
+                    <th>Blood Temp.</th>
+                    <th>Pulse Rate</th>
+                    <th>Resp. Rate</th>
+                    <th>Blood Pressure</th>
+                    <th>Blood Oxygen</th>
+                    <th>Body Weight</th>
+                    <th>Blood Glucose</th>
+                    <th>Walking</th>
+                    <th>Jogging</th>
+                    <th>Running</th>
+                    <th>Cycling</th>
+                    <th>Skipping</th>
+                    <th>Yoga</th>
+                    <th>Dance</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {reportData.map((item, index) => (
+                    <Report key={index} i={index} item={item} />
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
-        </div>
-        <div className="table-div">
-          <table className="date-table">
-            <thead>
-              <tr>
-                <th className="date-heading"> Date </th>
-              </tr>
-            </thead>
-            <tbody>
-              {reportData.map((item, index) => (
-                <ReportDates item={item} i={index} key={index} />
-              ))}
-            </tbody>
-          </table>
-          <table>
-            <thead>
-              <tr className="report-header">
-                <th>Blood Temp.</th>
-                <th>Pulse Rate</th>
-                <th>Resp. Rate</th>
-                <th>Blood Pressure</th>
-                <th>Blood Oxygen</th>
-                <th>Body Weight</th>
-                <th>Blood Glucose</th>
-                <th>Walking</th>
-                <th>Jogging</th>
-                <th>Running</th>
-                <th>Cycling</th>
-                <th>Skipping</th>
-                <th>Yoga</th>
-                <th>Dance</th>
-              </tr>
-            </thead>
-            <tbody>
-              {reportData.map((item, index) => (
-                <Report key={index} i={index} item={item} />
-              ))}
-            </tbody>
-          </table>
-        </div>
+        )}
+        {/* <Pagination /> */}
       </div>
     </div>
   );
