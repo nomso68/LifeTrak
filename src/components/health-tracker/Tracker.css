@@ -182,7 +182,7 @@
 
 .date-input::-webkit-calendar-picker-indicator {
   background: url("../../assets/calendar-days.svg") no-repeat center;
-  color: transparent;
+  color: #02035d;
   cursor: pointer;
 }
 
@@ -246,6 +246,7 @@
 
   .date-input {
     width: 100%;
+    color: #02035d;
   }
 
   .tracker-title {

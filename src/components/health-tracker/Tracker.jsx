@@ -8,7 +8,16 @@ const Tracker = () => {
   const navigate = useNavigate();
   const [userId, setUserId] = useState(localStorage.getItem("user") || "");
   const [patientName, setPatientName] = useState("");
-  const [selectedDate, setSelectedDate] = useState("");
+
+  const getCurrentDate = () => {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, "0"); // Months are zero-based
+    const day = String(today.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  };
+
+  const [selectedDate, setSelectedDate] = useState(getCurrentDate());
   const [formData, setFormData] = useState({
     userId: userId,
     date: new Date().toISOString().split("T")[0],
@@ -232,6 +241,7 @@ const Tracker = () => {
                 value={selectedDate}
                 onChange={handleDateChange}
                 className="date-input"
+                placeholder="DD/MM/YYYY"
               />
             </div>
           </section>

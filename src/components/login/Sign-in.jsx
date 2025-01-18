@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import { useState, useContext } from "react";
 import "./Sign-in.css";
 import "./Beat";
 import Beat from "./Beat";
 import Locked2 from "./Locked2";
 import User4 from "./User4";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../../utils/AuthContext";
 
 const SignIn = () => {
   const navigate = useNavigate();
+  const { setUserInfo } = useContext(AuthContext);
   const [forgotEmail, setForgotEmail] = useState("");
   const [showForgotModal, setShowForgotModal] = useState(false);
   const [form, setForm] = useState({
@@ -45,6 +47,7 @@ const SignIn = () => {
       }
 
       const data = await response.json();
+      setUserInfo(data);
       // Update user state
       setUser(data.userId);
       localStorage.setItem("user", data.userId);
