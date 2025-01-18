@@ -1,0 +1,24 @@
+.report-list {
+  text-align: center;
+  padding: 20px;
+}
+
+.export-button {
+  padding: 10px 20px;
+  background-color: #02035d;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.export-button:hover {
+  background-color: #04108a;
+}
+
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
