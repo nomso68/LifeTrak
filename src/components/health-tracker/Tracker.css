@@ -127,7 +127,7 @@
 .submit-info {
   margin-top: 50px;
   display: flex;
-  gap: 3rem;
+  gap: 1rem;
 }
 
 .report_button {
@@ -287,6 +287,13 @@
 
   .vitals-title {
     font-size: 1.5rem; /* Adjust font size */
+  }
+
+  .submit-info {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
   }
 }
 

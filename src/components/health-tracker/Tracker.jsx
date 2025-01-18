@@ -120,7 +120,6 @@ const Tracker = () => {
     try {
       // Convert string values to numbers where applicable
       const convertedFormData = {
-        userId: userId, // Make sure this is included
         ...formData,
         vitals: {
           ...formData.vitals,
