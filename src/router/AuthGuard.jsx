@@ -19,7 +19,7 @@ const AuthGuard = ({ children, isDataAnalystRoute = false }) => {
 
       try {
         const response = await fetch(
-          "https://lifetrak.onrender.com/validate-code",
+          "https://lifetrak.onrender.com/api/validate-code",
           {
             method: "POST",
             headers: {
@@ -32,7 +32,7 @@ const AuthGuard = ({ children, isDataAnalystRoute = false }) => {
         if (response.ok) {
           const data = await response.json();
           alert(data.message); // Display success message
-          navigate("/health-stats"); // Redirect to the health stats page
+          navigate("/allreport"); // Redirect to the health stats page
         } else {
           const data = await response.json();
           setError(data.message); // Display error message
