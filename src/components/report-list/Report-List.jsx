@@ -2,86 +2,50 @@ import React, { useEffect, useState } from "react";
 import * as XLSX from "xlsx";
 import "./Report-List.css";
 import Funnel1 from "./Funnel1";
-import Search1 from "./Search1";
 import Doc1 from "./Doc1";
-import BarChart4 from "./BarChart4";
 import { useNavigate } from "react-router-dom";
 import { Circles } from "react-loader-spinner";
+
+function calcTime(time) {
+  if (time < 60) {
+    return `${time} min`;
+  } else {
+    return `${(time / 60).toFixed(1)} hr`;
+  }
+}
 
 const Report = ({ item, i }) => {
   return (
     <tr className="report-body">
-      <td className={i % 2 === 0 ? "" : "even"}>
-        {item.vitals.bloodTemp || "-"}
-      </td>
-      <td className={i % 2 === 0 ? "" : "even"}>
-        {item.vitals.pulseRate || "-"}
-      </td>
-      <td className={i % 2 === 0 ? "" : "even"}>
-        {item.vitals.respRate || "-"}
-      </td>
-      <td className={i % 2 === 0 ? "" : "even"}>
-        {item.vitals.bloodPressure || "-"}
-      </td>
-      <td className={i % 2 === 0 ? "" : "even"}>
-        {`${item.vitals.bloodOxygen}%` || "-"}
-      </td>
-      <td className={i % 2 === 0 ? "" : "even"}>
-        {item.vitals.bodyWeight ? `${item.vitals.bodyWeight}kg` : "-"}
-      </td>
-      <td className={i % 2 === 0 ? "" : "even"}>
-        {item.vitals.bloodGlucose ? `${item.vitals.bloodGlucose}mg/DL` : "-"}
-      </td>
-      <td className={i % 2 === 0 ? "" : "even"}>
-        {item.exerciseLog.walking ? `${item.exerciseLog.walking}km` : "-"}
-      </td>
-      <td className={i % 2 === 0 ? "" : "even"}>
-        {item.exerciseLog.jogging ? `${item.exerciseLog.jogging}km` : "-"}
-      </td>
-      <td className={i % 2 === 0 ? "" : "even"}>
-        {item.exerciseLog.running ? `${item.exerciseLog.running}km` : "-"}
-      </td>
-      <td className={i % 2 === 0 ? "" : "even"}>
-        {item.exerciseLog.cycling ? `${item.exerciseLog.cycling}km` : "-"}
-      </td>
-      <td className={i % 2 === 0 ? "" : "even"}>
-        {item.exerciseLog.skipping
-          ? `${item.exerciseLog.skipping} counts`
-          : "-"}
-      </td>
-      <td className={i % 2 === 0 ? "" : "even"}>
-        {item.exerciseLog.yoga ? calcTime(item.exerciseLog.yoga) : "-"}
-      </td>
-      <td className={i % 2 === 0 ? "" : "even"}>
-        {item.exerciseLog.dance ? calcTime(item.exerciseLog.dance) : "-"}
-      </td>
+      <td className={i % 2 === 0 ? "" : "even"}>{item.vitals.bloodTemp}</td>
+      <td className={i % 2 === 0 ? "" : "even"}>{item.vitals.pulseRate}</td>
+      <td className={i % 2 === 0 ? "" : "even"}>{item.vitals.respRate}</td>
+      <td className={i % 2 === 0 ? "" : "even"}>{item.vitals.bloodPressure}</td>
+      <td className={i % 2 === 0 ? "" : "even"}>{item.vitals.bloodOxygen}</td>
+      <td className={i % 2 === 0 ? "" : "even"}>{item.vitals.bodyWeight}</td>
+      <td className={i % 2 === 0 ? "" : "even"}>{item.vitals.bloodGlucose}</td>
+      <td className={i % 2 === 0 ? "" : "even"}>{item.exerciseLog.walking}</td>
+      <td className={i % 2 === 0 ? "" : "even"}>{item.exerciseLog.jogging}</td>
+      <td className={i % 2 === 0 ? "" : "even"}>{item.exerciseLog.running}</td>
+      <td className={i % 2 === 0 ? "" : "even"}>{item.exerciseLog.cycling}</td>
+      <td className={i % 2 === 0 ? "" : "even"}>{item.exerciseLog.skipping}</td>
+      <td className={i % 2 === 0 ? "" : "even"}>{item.exerciseLog.yoga}</td>
+      <td className={i % 2 === 0 ? "" : "even"}>{item.exerciseLog.dance}</td>
     </tr>
   );
 };
 
-function calcTime(time) {
-  if (time < 60) {
-    let minOrHr = "min";
-    return `${time} ${minOrHr}`;
-  } else {
-    let minOrHr = "hr";
-    return `${(time / 60).toFixed(1)} ${minOrHr}`;
-  }
-}
-
 const ReportDates = ({ item, i }) => {
   return (
     <tr>
-      <td className={i % 2 === 0 ? "" : "even"}>
-        {item.date.slice(0, 10) || "-"}
-      </td>
+      <td className={i % 2 === 0 ? "" : "even"}>{item.date.slice(0, 10)}</td>
     </tr>
   );
 };
 
 const ReportList = () => {
   const navigate = useNavigate();
-  const [reportData, setreportData] = useState([]);
+  const [reportData, setReportData] = useState([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -98,18 +62,40 @@ const ReportList = () => {
 
         if (!response.ok) {
           console.log(response);
-
           localStorage.removeItem("user");
           navigate("/login");
           throw new Error(`Error: ${response.status} ${response.statusText}`);
         }
         const data = await response.json();
-        console.log(data);
+        console.log("Fetched Data:", data);
 
-        setLoading(false);
-        setreportData(data);
+        const formattedData = data.map((item) => ({
+          date: item.date || "N/A",
+          vitals: {
+            bloodTemp: item.vitals?.bodyTemperature || "N/A",
+            pulseRate: item.vitals?.pulseRate || "N/A",
+            respRate: item.vitals?.respirationRate || "N/A",
+            bloodPressure: item.vitals?.bloodPressure || "N/A",
+            bloodOxygen: item.vitals?.bloodOxygen || "N/A",
+            bodyWeight: item.vitals?.weight || "N/A",
+            bloodGlucose: item.vitals?.bloodGlucose || "N/A",
+          },
+          exerciseLog: {
+            walking: item.exerciseLog?.walking || "N/A",
+            jogging: item.exerciseLog?.jogging || "N/A",
+            running: item.exerciseLog?.running || "N/A",
+            cycling: item.exerciseLog?.cycling || "N/A",
+            skipping: item.exerciseLog?.ropeSkipping || "N/A",
+            yoga: item.exerciseLog?.yoga || "N/A",
+            dance: item.exerciseLog?.dance || "N/A",
+          },
+        }));
+
+        setReportData(formattedData);
       } catch (error) {
         window.alert("Please Log In");
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -135,20 +121,20 @@ const ReportList = () => {
     ];
 
     const rows = reportData.map((item) => [
-      item.vitals.bloodTemp || "-",
-      item.vitals.pulseRate || "-",
-      item.vitals.respRate || "-",
-      item.vitals.bloodPressure || "-",
-      `${item.vitals.bloodOxygen}%` || "-",
-      item.vitals.bodyWeight ? `${item.vitals.bodyWeight}kg` : "-",
-      item.vitals.bloodGlucose ? `${item.vitals.bloodGlucose}mg/DL` : "-",
-      item.exerciseLog.walking ? `${item.exerciseLog.walking}km` : "-",
-      item.exerciseLog.jogging ? `${item.exerciseLog.jogging}km` : "-",
-      item.exerciseLog.running ? `${item.exerciseLog.running}km` : "-",
-      item.exerciseLog.cycling ? `${item.exerciseLog.cycling}km` : "-",
-      item.exerciseLog.skipping ? `${item.exerciseLog.skipping} counts` : "-",
-      item.exerciseLog.yoga ? calcTime(item.exerciseLog.yoga) : "-",
-      item.exerciseLog.dance ? calcTime(item.exerciseLog.dance) : "-",
+      item.vitals.bloodTemp,
+      item.vitals.pulseRate,
+      item.vitals.respRate,
+      item.vitals.bloodPressure,
+      item.vitals.bloodOxygen,
+      item.vitals.bodyWeight,
+      item.vitals.bloodGlucose,
+      item.exerciseLog.walking,
+      item.exerciseLog.jogging,
+      item.exerciseLog.running,
+      item.exerciseLog.cycling,
+      item.exerciseLog.skipping,
+      item.exerciseLog.yoga,
+      item.exerciseLog.dance,
     ]);
 
     const ws = XLSX.utils.aoa_to_sheet([headers, ...rows]);
@@ -167,8 +153,6 @@ const ReportList = () => {
               width="40"
               color="#02035d"
               ariaLabel="circles-loading"
-              wrapperStyle={{}}
-              wrapperClass=""
               visible={true}
             />
           </div>
@@ -179,16 +163,12 @@ const ReportList = () => {
               <div className="filters-left">
                 <div>
                   <select name="from" id="from">
-                    <option selected value="allTime">
-                      All Time
-                    </option>
+                    <option value="allTime">All Time</option>
                   </select>
                 </div>
                 <div>
                   <select name="to" id="to">
-                    <option selected value="allTime">
-                      All Time
-                    </option>
+                    <option value="allTime">All Time</option>
                   </select>
                 </div>
                 <button className="funnel">
@@ -196,16 +176,8 @@ const ReportList = () => {
                 </button>
               </div>
               <div className="filters-right">
-                {/* <div>
-              <Search1 />
-              <input type="text" id="search" placeholder="Search..." />
-            </div> */}
                 <button onClick={exportToExcel}>
                   <Doc1 />
-                  <p className="export">Export PDF</p>
-                </button>
-                <button>
-                  <BarChart4 />
                   <p className="export">Export Excel</p>
                 </button>
               </div>
@@ -214,19 +186,19 @@ const ReportList = () => {
               <table className="date-table">
                 <thead>
                   <tr>
-                    <th className="date-heading"> Date </th>
+                    <th className="date-heading">Date</th>
                   </tr>
                 </thead>
                 <tbody>
                   {reportData.map((item, index) => (
-                    <ReportDates item={item} i={index} key={index} />
+                    <ReportDates key={index} item={item} i={index} />
                   ))}
                 </tbody>
               </table>
-              <table className="">
+              <table>
                 <thead>
                   <tr className="report-header">
-                    <th>Blood Temp.</th>
+                    <th>Body Temp.</th>
                     <th>Pulse Rate</th>
                     <th>Resp. Rate</th>
                     <th>Blood Pressure</th>
@@ -244,14 +216,13 @@ const ReportList = () => {
                 </thead>
                 <tbody>
                   {reportData.map((item, index) => (
-                    <Report key={index} i={index} item={item} />
+                    <Report key={index} item={item} i={index} />
                   ))}
                 </tbody>
               </table>
             </div>
           </div>
         )}
-        {/* <Pagination /> */}
       </div>
     </div>
   );
