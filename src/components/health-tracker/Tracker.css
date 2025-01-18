@@ -293,7 +293,7 @@
 .print-report {
   display: flex;
   flex-direction: row;
-  gap: 4rem;
+  gap: 1rem;
 }
 
 .notif {

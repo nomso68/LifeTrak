@@ -1,13 +1,18 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import "./Tracker.css";
 import Bell1 from "./Bell1";
 import ChevronDown from "./ChevronDown";
 import { useNavigate, Link } from "react-router-dom";
+import { AuthContext } from "../../../utils/AuthContext";
 import { Circles } from "react-loader-spinner";
 
 const Tracker = () => {
   const navigate = useNavigate();
-  const [userId, setUserId] = useState(localStorage.getItem("user") || "");
+  const { userInfo } = useContext(AuthContext);
+  console.log(userInfo);
+  // console.log(userHealthInfo);
+  const userId = userInfo?.userId;
+  console.log(userId);
   const [patientName, setPatientName] = useState("");
   const [loading, setLoading] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -563,6 +568,9 @@ const Tracker = () => {
                 </button>
                 <Link to={"/report"}>
                   <button className="report_button">View Reports</button>
+                </Link>
+                <Link to={"/health-stats"}>
+                  <button className="report_button">View All Reports</button>
                 </Link>
               </section>
             </form>
